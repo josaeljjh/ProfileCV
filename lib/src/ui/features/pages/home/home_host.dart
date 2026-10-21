@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../contact/contact_page.dart';
+import '../projects/projects_page.dart';
 import '../skills/skills_page.dart';
 import 'home_page.dart';
 
-/// Hosts the bottom navigation for the CV: Home, Skills and Contact.
-/// Mirrors the role PokeApp2's HomeHost plays for its own bottom nav.
+/// Hosts the bottom navigation for the CV: Home, Skills, Proyectos and
+/// Contacto. Mirrors the role PokeApp2's HomeHost plays for its own
+/// bottom nav.
 class HomeHost extends StatefulWidget {
   const HomeHost({Key? key}) : super(key: key);
 
@@ -21,6 +23,7 @@ class _HomeHostState extends State<HomeHost> {
   final _pages = const [
     HomePage(),
     SkillsPage(),
+    ProjectsPage(),
     ContactPage(),
   ];
 
@@ -32,6 +35,7 @@ class _HomeHostState extends State<HomeHost> {
         children: _pages,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         onTap: (index) => setState(() => _currentIndex = index),
         items: const [
@@ -44,6 +48,11 @@ class _HomeHostState extends State<HomeHost> {
             icon: Icon(Icons.star_outline),
             activeIcon: Icon(Icons.star),
             label: 'Skills',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.code_outlined),
+            activeIcon: Icon(Icons.code),
+            label: 'Proyectos',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.mail_outline),
