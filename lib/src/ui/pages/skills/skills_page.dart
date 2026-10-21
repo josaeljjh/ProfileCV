@@ -11,7 +11,7 @@ class SkillsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<SkillsCubit>()..loadData(),
+      create: (context) => sl<SkillsCubit>()..loadData(Localizations.localeOf(context)),
       child: const SkillsPageContent(),
     );
   }

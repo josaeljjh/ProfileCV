@@ -1,3 +1,5 @@
+import 'dart:ui' show Locale;
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/resources/data_state.dart';
@@ -21,13 +23,13 @@ class HomeCubit extends Cubit<HomeUiState> {
   final GetHomeSkillsUseCase getHomeSkillsUseCase;
   final GetExperienceUseCase getExperienceUseCase;
 
-  Future<void> loadData() async {
+  Future<void> loadData(Locale locale) async {
     emit(state.copyWith(isLoading: true, hasError: false));
 
-    final profileResult = await getProfileUseCase(params: const NoParams());
+    final profileResult = await getProfileUseCase(params: LocaleParams(locale));
     final portfolioResult = await getPortfolioUseCase(params: const NoParams());
     final homeSkillsResult = await getHomeSkillsUseCase(params: const NoParams());
-    final experienceResult = await getExperienceUseCase(params: const NoParams());
+    final experienceResult = await getExperienceUseCase(params: LocaleParams(locale));
 
     if (profileResult is DataSuccess &&
         portfolioResult is DataSuccess &&

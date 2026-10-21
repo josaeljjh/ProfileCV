@@ -1,7 +1,9 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:localization/localization.dart';
 import 'package:profile_cv/src/domain/models/contact_model.dart';
 import 'package:profile_cv/src/ui/pages/contact/contact_page_content.dart';
 import 'package:profile_cv/src/ui/pages/contact/cubit/contact_cubit.dart';
@@ -12,6 +14,10 @@ class MockContactCubit extends MockCubit<ContactUiState> implements ContactCubit
 void main() {
   late MockContactCubit mockCubit;
 
+  setUpAll(() {
+    LocalJsonLocalization.delegate.directories = ['res/i18n'];
+  });
+
   setUp(() {
     mockCubit = MockContactCubit();
   });
@@ -20,6 +26,14 @@ void main() {
     when(() => mockCubit.state).thenReturn(state);
     when(() => mockCubit.stream).thenAnswer((_) => Stream.value(state));
     return MaterialApp(
+      locale: const Locale('es', 'ES'),
+      supportedLocales: const [Locale('es', 'ES'), Locale('en', 'US')],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        LocalJsonLocalization.delegate,
+      ],
       home: BlocProvider<ContactCubit>.value(
         value: mockCubit,
         child: const ContactPageContent(),
@@ -30,7 +44,7 @@ void main() {
   group('ContactPageContent', () {
     testWidgets('shows a loading indicator when loading', (tester) async {
       await tester.pumpWidget(buildTestWidget(ContactUiState.initial()));
-      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
 
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
     });
@@ -38,7 +52,7 @@ void main() {
     testWidgets('shows a retry button on error', (tester) async {
       final errorState = ContactUiState.initial().copyWith(isLoading: false, hasError: true);
       await tester.pumpWidget(buildTestWidget(errorState));
-      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
 
       expect(find.text('Reintentar'), findsOneWidget);
     });
@@ -55,7 +69,7 @@ void main() {
         ),
       );
       await tester.pumpWidget(buildTestWidget(loadedState));
-      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 100));
 
       expect(find.text('test@example.com'), findsOneWidget);
       expect(find.text('+1 234'), findsOneWidget);

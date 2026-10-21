@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 
 import '../../../config/resources/colors.dart';
 import '../../../config/resources/sizes.dart';
+import '../../../core/resources/translations_constant.dart';
 import 'cubit/skills_cubit.dart';
 import 'cubit/skills_ui_state.dart';
 
@@ -13,7 +15,7 @@ class SkillsPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Skills')),
+      appBar: AppBar(title: Text(SKILLS_TITLE.i18n())),
       body: BlocBuilder<SkillsCubit, SkillsUiState>(
         builder: (context, state) {
           if (state.isLoading) {
@@ -24,11 +26,11 @@ class SkillsPageContent extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('No se pudieron cargar las skills.'),
+                  Text(ERROR_SKILLS.i18n()),
                   const SizedBox(height: paddingMD),
                   ElevatedButton(
-                    onPressed: () => context.read<SkillsCubit>().loadData(),
-                    child: const Text('Reintentar'),
+                    onPressed: () => context.read<SkillsCubit>().loadData(Localizations.localeOf(context)),
+                    child: Text(ACTION_RETRY.i18n()),
                   ),
                 ],
               ),

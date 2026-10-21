@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:localization/localization.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import '../config/di/service_locator.dart';
@@ -51,11 +53,28 @@ class _AppState extends State<App> {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    LocalJsonLocalization.delegate.directories = ['res/i18n'];
     return MaterialApp(
       title: "ProfileCV",
       debugShowCheckedModeBanner: kDebugMode ? true : false,
       onGenerateRoute: (settings) => Routes().routes(settings),
       navigatorKey: sl.get<NavigationService>().navigatorKey,
+      localeResolutionCallback: (locale, supportedLocales) {
+        if (locale?.languageCode == 'en') {
+          return const Locale('en', 'US');
+        }
+        return const Locale('es', 'ES');
+      },
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        LocalJsonLocalization.delegate,
+      ],
+      supportedLocales: const [
+        Locale('es', 'ES'),
+        Locale('en', 'US'),
+      ],
       builder: (context, widget) => ResponsiveBreakpoints.builder(
         child: widget!,
         breakpoints: [

@@ -3,11 +3,12 @@ import '../../core/usecase/usecase.dart';
 import '../models/skill_group_model.dart';
 import '../repositories/cv_repository.dart';
 
-class GetSkillGroupsUseCase implements UseCase<DataState<List<SkillGroupModel>>, NoParams> {
+class GetSkillGroupsUseCase implements UseCase<DataState<List<SkillGroupModel>>, LocaleParams> {
   GetSkillGroupsUseCase(this.repository);
 
   final CvRepository repository;
 
   @override
-  Future<DataState<List<SkillGroupModel>>> call({NoParams? params}) => repository.getSkillGroups();
+  Future<DataState<List<SkillGroupModel>>> call({LocaleParams? params}) =>
+      repository.getSkillGroups(params!.locale);
 }

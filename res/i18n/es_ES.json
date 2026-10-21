@@ -1,0 +1,21 @@
+{
+  "cv_title": "CV",
+  "skills_title": "Skills",
+  "projects_title": "Proyectos",
+  "contact_title": "Contacto",
+  "section_portfolio": "Portfolio",
+  "section_skills": "Skills",
+  "section_experience": "Experiencia",
+  "nav_home": "Home",
+  "nav_skills": "Skills",
+  "nav_projects": "Proyectos",
+  "nav_contact": "Contacto",
+  "contact_email_label": "Correo",
+  "contact_phone_label": "Teléfono",
+  "contact_linkedin_label": "LinkedIn",
+  "error_home": "No se pudo cargar tu información.",
+  "error_skills": "No se pudieron cargar las skills.",
+  "error_projects": "No se pudieron cargar los proyectos.",
+  "error_contact": "No se pudo cargar el contacto.",
+  "action_retry": "Reintentar"
+}

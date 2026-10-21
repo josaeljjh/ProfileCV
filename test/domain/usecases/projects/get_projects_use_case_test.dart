@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:profile_cv/src/core/resources/data_state.dart';
@@ -12,6 +14,7 @@ void main() {
   late MockCvRepository mockRepository;
   late GetProjectsUseCase useCase;
 
+  const locale = Locale('es', 'ES');
   const projects = [
     ProjectModel(name: 'ProfileCV', description: 'Desc', tech: 'Flutter', url: 'https://example.com'),
   ];
@@ -21,21 +24,21 @@ void main() {
     useCase = GetProjectsUseCase(mockRepository);
   });
 
-  test('calls repository.getProjects and returns its success data', () async {
-    when(() => mockRepository.getProjects()).thenAnswer((_) async => const DataSuccess(projects));
+  test('calls repository.getProjects with the given locale and returns its success data', () async {
+    when(() => mockRepository.getProjects(locale)).thenAnswer((_) async => const DataSuccess(projects));
 
-    final result = await useCase(params: const NoParams());
+    final result = await useCase(params: const LocaleParams(locale));
 
     expect(result, isA<DataSuccess<List<ProjectModel>>>());
     expect((result as DataSuccess<List<ProjectModel>>).data, projects);
-    verify(() => mockRepository.getProjects()).called(1);
+    verify(() => mockRepository.getProjects(locale)).called(1);
   });
 
   test('propagates DataError from the repository', () async {
     final error = Exception('failed');
-    when(() => mockRepository.getProjects()).thenAnswer((_) async => DataError(error));
+    when(() => mockRepository.getProjects(locale)).thenAnswer((_) async => DataError(error));
 
-    final result = await useCase(params: const NoParams());
+    final result = await useCase(params: const LocaleParams(locale));
 
     expect(result, isA<DataError<List<ProjectModel>>>());
   });

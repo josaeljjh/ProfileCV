@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../config/resources/sizes.dart';
+import '../../../core/resources/translations_constant.dart';
 import 'cubit/contact_cubit.dart';
 import 'cubit/contact_ui_state.dart';
 
@@ -19,7 +21,7 @@ class ContactPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Contacto')),
+      appBar: AppBar(title: Text(CONTACT_TITLE.i18n())),
       body: BlocBuilder<ContactCubit, ContactUiState>(
         builder: (context, state) {
           if (state.isLoading) {
@@ -30,11 +32,11 @@ class ContactPageContent extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('No se pudo cargar el contacto.'),
+                  Text(ERROR_CONTACT.i18n()),
                   const SizedBox(height: paddingMD),
                   ElevatedButton(
                     onPressed: () => context.read<ContactCubit>().loadData(),
-                    child: const Text('Reintentar'),
+                    child: Text(ACTION_RETRY.i18n()),
                   ),
                 ],
               ),
@@ -48,7 +50,7 @@ class ContactPageContent extends StatelessWidget {
               Card(
                 child: ListTile(
                   leading: const Icon(Icons.email_outlined),
-                  title: const Text('Correo'),
+                  title: Text(CONTACT_EMAIL_LABEL.i18n()),
                   subtitle: Text(contact.email),
                   onTap: () => _open(Uri(scheme: 'mailto', path: contact.email)),
                 ),
@@ -57,7 +59,7 @@ class ContactPageContent extends StatelessWidget {
               Card(
                 child: ListTile(
                   leading: const Icon(Icons.phone_outlined),
-                  title: const Text('Teléfono'),
+                  title: Text(CONTACT_PHONE_LABEL.i18n()),
                   subtitle: Text(contact.phone),
                   onTap: () => _open(Uri(scheme: 'tel', path: contact.phone.replaceAll(' ', ''))),
                 ),
@@ -66,7 +68,7 @@ class ContactPageContent extends StatelessWidget {
               Card(
                 child: ListTile(
                   leading: const Icon(Icons.link),
-                  title: const Text('LinkedIn'),
+                  title: Text(CONTACT_LINKEDIN_LABEL.i18n()),
                   subtitle: Text(contact.linkedinDisplay),
                   onTap: () => _open(Uri.parse(contact.linkedinUrl)),
                 ),

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -28,6 +30,7 @@ void main() {
   late MockGetExperienceUseCase mockGetExperience;
   late HomeCubit cubit;
 
+  const locale = Locale('es', 'ES');
   const profile = ProfileModel(
     name: 'Test Name',
     title: 'Test Title',
@@ -74,13 +77,13 @@ void main() {
   blocTest<HomeCubit, HomeUiState>(
     'emits loading then success with all four datasets when every use case succeeds',
     build: () {
-      when(() => mockGetProfile(params: const NoParams())).thenAnswer((_) async => const DataSuccess(profile));
+      when(() => mockGetProfile(params: const LocaleParams(locale))).thenAnswer((_) async => const DataSuccess(profile));
       when(() => mockGetPortfolio(params: const NoParams())).thenAnswer((_) async => const DataSuccess(portfolio));
       when(() => mockGetHomeSkills(params: const NoParams())).thenAnswer((_) async => const DataSuccess(homeSkills));
-      when(() => mockGetExperience(params: const NoParams())).thenAnswer((_) async => const DataSuccess(experience));
+      when(() => mockGetExperience(params: const LocaleParams(locale))).thenAnswer((_) async => const DataSuccess(experience));
       return cubit;
     },
-    act: (cubit) => cubit.loadData(),
+    act: (cubit) => cubit.loadData(locale),
     expect: () => [
       isA<HomeUiState>().having((s) => s.isLoading, 'isLoading', true),
       isA<HomeUiState>()
@@ -96,13 +99,13 @@ void main() {
   blocTest<HomeCubit, HomeUiState>(
     'emits loading then error when any use case fails',
     build: () {
-      when(() => mockGetProfile(params: const NoParams())).thenAnswer((_) async => DataError(Exception('failed')));
+      when(() => mockGetProfile(params: const LocaleParams(locale))).thenAnswer((_) async => DataError(Exception('failed')));
       when(() => mockGetPortfolio(params: const NoParams())).thenAnswer((_) async => const DataSuccess(portfolio));
       when(() => mockGetHomeSkills(params: const NoParams())).thenAnswer((_) async => const DataSuccess(homeSkills));
-      when(() => mockGetExperience(params: const NoParams())).thenAnswer((_) async => const DataSuccess(experience));
+      when(() => mockGetExperience(params: const LocaleParams(locale))).thenAnswer((_) async => const DataSuccess(experience));
       return cubit;
     },
-    act: (cubit) => cubit.loadData(),
+    act: (cubit) => cubit.loadData(locale),
     expect: () => [
       isA<HomeUiState>().having((s) => s.isLoading, 'isLoading', true),
       isA<HomeUiState>()

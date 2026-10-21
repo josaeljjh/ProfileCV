@@ -1,0 +1,21 @@
+{
+  "cv_title": "CV",
+  "skills_title": "Skills",
+  "projects_title": "Projects",
+  "contact_title": "Contact",
+  "section_portfolio": "Portfolio",
+  "section_skills": "Skills",
+  "section_experience": "Experience",
+  "nav_home": "Home",
+  "nav_skills": "Skills",
+  "nav_projects": "Projects",
+  "nav_contact": "Contact",
+  "contact_email_label": "Email",
+  "contact_phone_label": "Phone",
+  "contact_linkedin_label": "LinkedIn",
+  "error_home": "We couldn't load your information.",
+  "error_skills": "We couldn't load your skills.",
+  "error_projects": "We couldn't load your projects.",
+  "error_contact": "We couldn't load your contact info.",
+  "action_retry": "Retry"
+}

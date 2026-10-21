@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../config/resources/colors.dart';
 import '../../../config/resources/sizes.dart';
+import '../../../core/resources/translations_constant.dart';
 import 'cubit/projects_cubit.dart';
 import 'cubit/projects_ui_state.dart';
 
@@ -21,7 +23,7 @@ class ProjectsPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Proyectos')),
+      appBar: AppBar(title: Text(PROJECTS_TITLE.i18n())),
       body: BlocBuilder<ProjectsCubit, ProjectsUiState>(
         builder: (context, state) {
           if (state.isLoading) {
@@ -32,11 +34,11 @@ class ProjectsPageContent extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('No se pudieron cargar los proyectos.'),
+                  Text(ERROR_PROJECTS.i18n()),
                   const SizedBox(height: paddingMD),
                   ElevatedButton(
-                    onPressed: () => context.read<ProjectsCubit>().loadData(),
-                    child: const Text('Reintentar'),
+                    onPressed: () => context.read<ProjectsCubit>().loadData(Localizations.localeOf(context)),
+                    child: Text(ACTION_RETRY.i18n()),
                   ),
                 ],
               ),

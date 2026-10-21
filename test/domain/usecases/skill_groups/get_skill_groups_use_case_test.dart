@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:profile_cv/src/core/resources/data_state.dart';
@@ -12,6 +14,7 @@ void main() {
   late MockCvRepository mockRepository;
   late GetSkillGroupsUseCase useCase;
 
+  const locale = Locale('es', 'ES');
   const groups = [
     SkillGroupModel(category: 'Flutter / Dart', skills: ['Flutter', 'Dart']),
   ];
@@ -21,21 +24,21 @@ void main() {
     useCase = GetSkillGroupsUseCase(mockRepository);
   });
 
-  test('calls repository.getSkillGroups and returns its success data', () async {
-    when(() => mockRepository.getSkillGroups()).thenAnswer((_) async => const DataSuccess(groups));
+  test('calls repository.getSkillGroups with the given locale and returns its success data', () async {
+    when(() => mockRepository.getSkillGroups(locale)).thenAnswer((_) async => const DataSuccess(groups));
 
-    final result = await useCase(params: const NoParams());
+    final result = await useCase(params: const LocaleParams(locale));
 
     expect(result, isA<DataSuccess<List<SkillGroupModel>>>());
     expect((result as DataSuccess<List<SkillGroupModel>>).data, groups);
-    verify(() => mockRepository.getSkillGroups()).called(1);
+    verify(() => mockRepository.getSkillGroups(locale)).called(1);
   });
 
   test('propagates DataError from the repository', () async {
     final error = Exception('failed');
-    when(() => mockRepository.getSkillGroups()).thenAnswer((_) async => DataError(error));
+    when(() => mockRepository.getSkillGroups(locale)).thenAnswer((_) async => DataError(error));
 
-    final result = await useCase(params: const NoParams());
+    final result = await useCase(params: const LocaleParams(locale));
 
     expect(result, isA<DataError<List<SkillGroupModel>>>());
   });

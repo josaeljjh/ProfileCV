@@ -11,7 +11,7 @@ class ProjectsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<ProjectsCubit>()..loadData(),
+      create: (context) => sl<ProjectsCubit>()..loadData(Localizations.localeOf(context)),
       child: const ProjectsPageContent(),
     );
   }

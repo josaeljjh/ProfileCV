@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
 
 import '../../../config/resources/colors.dart';
 import '../../../config/resources/sizes.dart';
+import '../../../core/resources/translations_constant.dart';
 import '../../../domain/models/experience_model.dart';
 import '../../../domain/models/portfolio_item_model.dart';
 import 'cubit/home_cubit.dart';
@@ -78,9 +80,9 @@ class HomePageContent extends StatelessWidget {
         backgroundColor: white,
         elevation: 0,
         centerTitle: true,
-        title: const Text(
-          'CV',
-          style: TextStyle(color: black, fontWeight: FontWeight.bold),
+        title: Text(
+          CV_TITLE.i18n(),
+          style: const TextStyle(color: black, fontWeight: FontWeight.bold),
         ),
       ),
       body: BlocBuilder<HomeCubit, HomeUiState>(
@@ -93,11 +95,11 @@ class HomePageContent extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text('No se pudo cargar tu información.'),
+                  Text(ERROR_HOME.i18n()),
                   const SizedBox(height: paddingMD),
                   ElevatedButton(
-                    onPressed: () => context.read<HomeCubit>().loadData(),
-                    child: const Text('Reintentar'),
+                    onPressed: () => context.read<HomeCubit>().loadData(Localizations.localeOf(context)),
+                    child: Text(ACTION_RETRY.i18n()),
                   ),
                 ],
               ),
@@ -111,15 +113,15 @@ class HomePageContent extends StatelessWidget {
               children: [
                 _buildProfileHeader(state),
                 const SizedBox(height: paddingXXXL),
-                _sectionTitle('Portfolio'),
+                _sectionTitle(SECTION_PORTFOLIO.i18n()),
                 const SizedBox(height: paddingMD),
                 _buildPortfolio(state.portfolio),
                 const SizedBox(height: paddingXXXL),
-                _sectionTitle('Skills'),
+                _sectionTitle(SECTION_SKILLS.i18n()),
                 const SizedBox(height: paddingMD),
                 _buildSkills(state.homeSkills),
                 const SizedBox(height: paddingXXXL),
-                _sectionTitle('Experiencia'),
+                _sectionTitle(SECTION_EXPERIENCE.i18n()),
                 const SizedBox(height: paddingSM),
                 _buildExperience(state.experience),
               ],

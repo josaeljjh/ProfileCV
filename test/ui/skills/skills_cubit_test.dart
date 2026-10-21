@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -14,6 +16,7 @@ void main() {
   late MockGetSkillGroupsUseCase mockUseCase;
   late SkillsCubit cubit;
 
+  const locale = Locale('es', 'ES');
   const groups = [
     SkillGroupModel(category: 'Flutter / Dart', skills: ['Flutter', 'Dart']),
   ];
@@ -33,10 +36,10 @@ void main() {
   blocTest<SkillsCubit, SkillsUiState>(
     'emits loading then success with skill groups',
     build: () {
-      when(() => mockUseCase(params: const NoParams())).thenAnswer((_) async => const DataSuccess(groups));
+      when(() => mockUseCase(params: const LocaleParams(locale))).thenAnswer((_) async => const DataSuccess(groups));
       return cubit;
     },
-    act: (cubit) => cubit.loadData(),
+    act: (cubit) => cubit.loadData(locale),
     expect: () => [
       isA<SkillsUiState>().having((s) => s.isLoading, 'isLoading', true),
       isA<SkillsUiState>()
@@ -49,10 +52,10 @@ void main() {
   blocTest<SkillsCubit, SkillsUiState>(
     'emits loading then error when the use case fails',
     build: () {
-      when(() => mockUseCase(params: const NoParams())).thenAnswer((_) async => DataError(Exception('failed')));
+      when(() => mockUseCase(params: const LocaleParams(locale))).thenAnswer((_) async => DataError(Exception('failed')));
       return cubit;
     },
-    act: (cubit) => cubit.loadData(),
+    act: (cubit) => cubit.loadData(locale),
     expect: () => [
       isA<SkillsUiState>().having((s) => s.isLoading, 'isLoading', true),
       isA<SkillsUiState>().having((s) => s.hasError, 'hasError', true),

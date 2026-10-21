@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -14,6 +16,7 @@ void main() {
   late MockGetProjectsUseCase mockUseCase;
   late ProjectsCubit cubit;
 
+  const locale = Locale('es', 'ES');
   const projects = [
     ProjectModel(name: 'ProfileCV', description: 'Desc', tech: 'Flutter', url: 'https://example.com'),
   ];
@@ -33,10 +36,10 @@ void main() {
   blocTest<ProjectsCubit, ProjectsUiState>(
     'emits loading then success with projects',
     build: () {
-      when(() => mockUseCase(params: const NoParams())).thenAnswer((_) async => const DataSuccess(projects));
+      when(() => mockUseCase(params: const LocaleParams(locale))).thenAnswer((_) async => const DataSuccess(projects));
       return cubit;
     },
-    act: (cubit) => cubit.loadData(),
+    act: (cubit) => cubit.loadData(locale),
     expect: () => [
       isA<ProjectsUiState>().having((s) => s.isLoading, 'isLoading', true),
       isA<ProjectsUiState>()
@@ -49,10 +52,10 @@ void main() {
   blocTest<ProjectsCubit, ProjectsUiState>(
     'emits loading then error when the use case fails',
     build: () {
-      when(() => mockUseCase(params: const NoParams())).thenAnswer((_) async => DataError(Exception('failed')));
+      when(() => mockUseCase(params: const LocaleParams(locale))).thenAnswer((_) async => DataError(Exception('failed')));
       return cubit;
     },
-    act: (cubit) => cubit.loadData(),
+    act: (cubit) => cubit.loadData(locale),
     expect: () => [
       isA<ProjectsUiState>().having((s) => s.isLoading, 'isLoading', true),
       isA<ProjectsUiState>().having((s) => s.hasError, 'hasError', true),

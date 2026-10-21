@@ -12,6 +12,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  #localization
+  flutter_localizations:
+    sdk: flutter
+  localization: ^2.1.0
 
   cupertino_icons: ^1.0.6
 
@@ -66,6 +70,7 @@ flutter:
 
   assets:
     - assets/images/
+    - res/i18n/
 
   fonts:
     - family: Gotham

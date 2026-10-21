@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:profile_cv/src/core/resources/data_state.dart';
@@ -12,6 +14,7 @@ void main() {
   late MockCvRepository mockRepository;
   late GetExperienceUseCase useCase;
 
+  const locale = Locale('es', 'ES');
   const experience = [
     CompanyExperienceModel(
       company: 'Test Co',
@@ -28,21 +31,21 @@ void main() {
     useCase = GetExperienceUseCase(mockRepository);
   });
 
-  test('calls repository.getExperience and returns its success data', () async {
-    when(() => mockRepository.getExperience()).thenAnswer((_) async => const DataSuccess(experience));
+  test('calls repository.getExperience with the given locale and returns its success data', () async {
+    when(() => mockRepository.getExperience(locale)).thenAnswer((_) async => const DataSuccess(experience));
 
-    final result = await useCase(params: const NoParams());
+    final result = await useCase(params: const LocaleParams(locale));
 
     expect(result, isA<DataSuccess<List<CompanyExperienceModel>>>());
     expect((result as DataSuccess<List<CompanyExperienceModel>>).data, experience);
-    verify(() => mockRepository.getExperience()).called(1);
+    verify(() => mockRepository.getExperience(locale)).called(1);
   });
 
   test('propagates DataError from the repository', () async {
     final error = Exception('failed');
-    when(() => mockRepository.getExperience()).thenAnswer((_) async => DataError(error));
+    when(() => mockRepository.getExperience(locale)).thenAnswer((_) async => DataError(error));
 
-    final result = await useCase(params: const NoParams());
+    final result = await useCase(params: const LocaleParams(locale));
 
     expect(result, isA<DataError<List<CompanyExperienceModel>>>());
   });

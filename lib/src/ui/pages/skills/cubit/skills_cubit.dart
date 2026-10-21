@@ -1,3 +1,5 @@
+import 'dart:ui' show Locale;
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/resources/data_state.dart';
@@ -10,10 +12,10 @@ class SkillsCubit extends Cubit<SkillsUiState> {
 
   final GetSkillGroupsUseCase getSkillGroupsUseCase;
 
-  Future<void> loadData() async {
+  Future<void> loadData(Locale locale) async {
     emit(state.copyWith(isLoading: true, hasError: false));
 
-    final result = await getSkillGroupsUseCase(params: const NoParams());
+    final result = await getSkillGroupsUseCase(params: LocaleParams(locale));
 
     if (result is DataSuccess) {
       emit(state.copyWith(isLoading: false, hasError: false, skillGroups: result.data));

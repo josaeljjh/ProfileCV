@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 
+import '../../../core/resources/translations_constant.dart';
 import '../contact/contact_page.dart';
 import '../projects/projects_page.dart';
 import '../skills/skills_page.dart';
@@ -39,26 +41,26 @@ class _HomeHostState extends State<HomeHost> {
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         onTap: (index) => setState(() => _currentIndex = index),
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: 'Home',
+            icon: const Icon(Icons.home_outlined),
+            activeIcon: const Icon(Icons.home),
+            label: NAV_HOME.i18n(),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.star_outline),
-            activeIcon: Icon(Icons.star),
-            label: 'Skills',
+            icon: const Icon(Icons.star_outline),
+            activeIcon: const Icon(Icons.star),
+            label: NAV_SKILLS.i18n(),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.code_outlined),
-            activeIcon: Icon(Icons.code),
-            label: 'Proyectos',
+            icon: const Icon(Icons.code_outlined),
+            activeIcon: const Icon(Icons.code),
+            label: NAV_PROJECTS.i18n(),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.mail_outline),
-            activeIcon: Icon(Icons.mail),
-            label: 'Contacto',
+            icon: const Icon(Icons.mail_outline),
+            activeIcon: const Icon(Icons.mail),
+            label: NAV_CONTACT.i18n(),
           ),
         ],
       ),
