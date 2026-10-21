@@ -66,7 +66,7 @@ class _AppState extends State<App> {
         }
         return const Locale('es', 'ES');
       },
-      localizationsDelegates: const [
+      localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

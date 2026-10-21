@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:localization/localization.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:profile_cv/src/domain/models/contact_model.dart';
 import 'package:profile_cv/src/ui/pages/contact/contact_page_content.dart';
 import 'package:profile_cv/src/ui/pages/contact/cubit/contact_cubit.dart';
@@ -28,7 +29,7 @@ void main() {
     return MaterialApp(
       locale: const Locale('es', 'ES'),
       supportedLocales: const [Locale('es', 'ES'), Locale('en', 'US')],
-      localizationsDelegates: const [
+      localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
