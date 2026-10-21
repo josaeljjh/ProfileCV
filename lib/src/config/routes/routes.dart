@@ -2,7 +2,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import '../../ui/features/pages/profile/profile_page.dart';
+import '../../ui/features/pages/home/home_host.dart';
 
 class Routes {
   static const home = '/';
@@ -12,12 +12,12 @@ class Routes {
       case home:
         return _createRoute(
           settings,
-              (context) => ProfilePage.create(context),
+              (context) => HomeHost.create(context),
         );
       default:
         _createRoute(
           settings,
-              (context) => const ProfilePage(),
+              (context) => const HomeHost(),
         );
     }
     throw Exception('This route does not exist');
