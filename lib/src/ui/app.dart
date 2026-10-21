@@ -89,7 +89,7 @@ class _AppState extends State<App> {
         useMaterial3: true,
         fontFamily: gothamFontFamily,
         brightness: Brightness.light,
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: white,
       ),
       darkTheme: ThemeData(
         useMaterial3: true,

@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization/localization.dart';
 
-import '../../../config/resources/colors.dart';
 import '../../../config/resources/sizes.dart';
 import '../../../config/tools/locale_resolver.dart';
 import '../../../core/resources/translations_constant.dart';
+import '../../../presentation/widgets/feedback/error_view.dart';
+import '../../../presentation/widgets/feedback/loading_view.dart';
+import '../../../presentation/widgets/text/generic_label.dart';
 import 'cubit/skills_cubit.dart';
 import 'cubit/skills_ui_state.dart';
+import 'widgets/skill_group_section.dart';
 
 /// "Skills" tab content: technology skills grouped by area, from the CV.
 class SkillsPageContent extends StatelessWidget {
@@ -16,66 +19,24 @@ class SkillsPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(SKILLS_TITLE.i18n())),
+      // An explicit empty TextStyle forces GenericLabel to inherit the
+      // ambient AppBar title style instead of its own (unsuitable) default.
+      appBar: AppBar(title: GenericLabel(label: SKILLS_TITLE.i18n(), style: const TextStyle())),
       body: BlocBuilder<SkillsCubit, SkillsUiState>(
         builder: (context, state) {
           if (state.isLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const LoadingView();
           }
           if (state.hasError) {
-            return Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(ERROR_SKILLS.i18n()),
-                  const SizedBox(height: paddingMD),
-                  ElevatedButton(
-                    onPressed: () => context.read<SkillsCubit>().loadData(resolveAppLocale()),
-                    child: Text(ACTION_RETRY.i18n()),
-                  ),
-                ],
-              ),
+            return ErrorView(
+              message: ERROR_SKILLS.i18n(),
+              onRetry: () => context.read<SkillsCubit>().loadData(resolveAppLocale()),
             );
           }
 
           return ListView(
             padding: const EdgeInsets.all(paddingLG),
-            children: state.skillGroups
-                .map((group) => Padding(
-                      padding: const EdgeInsets.only(bottom: paddingXL),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            group.category,
-                            style: const TextStyle(fontSize: fontSize17, fontWeight: FontWeight.bold, color: black),
-                          ),
-                          const SizedBox(height: paddingSM + 2),
-                          Wrap(
-                            spacing: paddingSM + 2,
-                            runSpacing: paddingSM + 2,
-                            children: group.skills
-                                .map((skill) => Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: paddingMD + 2, vertical: paddingSM + 2),
-                                      decoration: BoxDecoration(
-                                        color: athensGray,
-                                        borderRadius: BorderRadius.circular(borderRadiusMD),
-                                      ),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          const Icon(Icons.check_circle_outline, size: iconSizeSM, color: niagara),
-                                          const SizedBox(width: paddingSM - 2),
-                                          Text(skill, style: const TextStyle(fontSize: fontSize13)),
-                                        ],
-                                      ),
-                                    ))
-                                .toList(),
-                          ),
-                        ],
-                      ),
-                    ))
-                .toList(),
+            children: state.skillGroups.map((group) => SkillGroupSection(group: group)).toList(),
           );
         },
       ),

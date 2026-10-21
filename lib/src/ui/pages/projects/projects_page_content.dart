@@ -3,18 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization/localization.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../config/resources/colors.dart';
 import '../../../config/resources/sizes.dart';
 import '../../../config/tools/locale_resolver.dart';
 import '../../../core/resources/translations_constant.dart';
+import '../../../presentation/widgets/feedback/error_view.dart';
+import '../../../presentation/widgets/feedback/loading_view.dart';
+import '../../../presentation/widgets/text/generic_label.dart';
 import 'cubit/projects_cubit.dart';
 import 'cubit/projects_ui_state.dart';
+import 'widgets/project_tile.dart';
 
 /// "Proyectos" tab content: personal GitHub repositories.
 class ProjectsPageContent extends StatelessWidget {
   const ProjectsPageContent({Key? key}) : super(key: key);
 
-  Future<void> _open(String url) async {
+  static Future<void> _open(String url) async {
     final uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
@@ -24,25 +27,18 @@ class ProjectsPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(PROJECTS_TITLE.i18n())),
+      // An explicit empty TextStyle forces GenericLabel to inherit the
+      // ambient AppBar title style instead of its own (unsuitable) default.
+      appBar: AppBar(title: GenericLabel(label: PROJECTS_TITLE.i18n(), style: const TextStyle())),
       body: BlocBuilder<ProjectsCubit, ProjectsUiState>(
         builder: (context, state) {
           if (state.isLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const LoadingView();
           }
           if (state.hasError) {
-            return Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(ERROR_PROJECTS.i18n()),
-                  const SizedBox(height: paddingMD),
-                  ElevatedButton(
-                    onPressed: () => context.read<ProjectsCubit>().loadData(resolveAppLocale()),
-                    child: Text(ACTION_RETRY.i18n()),
-                  ),
-                ],
-              ),
+            return ErrorView(
+              message: ERROR_PROJECTS.i18n(),
+              onRetry: () => context.read<ProjectsCubit>().loadData(resolveAppLocale()),
             );
           }
 
@@ -52,30 +48,7 @@ class ProjectsPageContent extends StatelessWidget {
             separatorBuilder: (_, __) => const SizedBox(height: paddingSM + 2),
             itemBuilder: (context, index) {
               final project = state.projects[index];
-              return Card(
-                child: ListTile(
-                  leading: const Icon(Icons.code, color: niagara),
-                  title: Text(
-                    project.name,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: paddingXS),
-                      Text(project.description),
-                      const SizedBox(height: paddingXS),
-                      Text(
-                        project.tech,
-                        style: const TextStyle(fontSize: fontSize12, color: slateGray),
-                      ),
-                    ],
-                  ),
-                  trailing: const Icon(Icons.open_in_new, size: iconSizeMD, color: slateGray),
-                  isThreeLine: true,
-                  onTap: () => _open(project.url),
-                ),
-              );
+              return ProjectTile(project: project, onTap: () => _open(project.url));
             },
           );
         },

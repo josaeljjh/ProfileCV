@@ -5,9 +5,12 @@ import 'package:localization/localization.dart';
 import '../../../config/resources/colors.dart';
 import '../../../config/resources/sizes.dart';
 import '../../../core/resources/translations_constant.dart';
-import '../../../domain/models/portfolio_item_model.dart';
+import '../../../presentation/widgets/feedback/error_view.dart';
+import '../../../presentation/widgets/feedback/loading_view.dart';
+import '../../../presentation/widgets/text/generic_label.dart';
 import 'cubit/portfolio_cubit.dart';
 import 'cubit/portfolio_ui_state.dart';
+import 'widgets/portfolio_grid_item.dart';
 
 /// "Portfolio" screen: the full list of apps/projects, reached by tapping
 /// Home's "Portfolio" section title. Same plain-white card treatment as
@@ -16,52 +19,22 @@ import 'cubit/portfolio_ui_state.dart';
 class PortfolioPageContent extends StatelessWidget {
   const PortfolioPageContent({Key? key}) : super(key: key);
 
-  static IconData _iconFor(String key) {
-    switch (key) {
-      case 'account_balance_wallet_outlined':
-        return Icons.account_balance_wallet_outlined;
-      case 'storefront_outlined':
-        return Icons.storefront_outlined;
-      case 'delivery_dining_outlined':
-        return Icons.delivery_dining_outlined;
-      case 'account_balance_outlined':
-        return Icons.account_balance_outlined;
-      case 'payments_outlined':
-        return Icons.payments_outlined;
-      case 'savings_outlined':
-        return Icons.savings_outlined;
-      case 'restaurant_outlined':
-        return Icons.restaurant_outlined;
-      case 'fastfood_outlined':
-        return Icons.fastfood_outlined;
-      default:
-        return Icons.apps_outlined;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
-      appBar: AppBar(title: Text(PORTFOLIO_TITLE.i18n())),
+      // An explicit empty TextStyle forces GenericLabel to inherit the
+      // ambient AppBar title style instead of its own (unsuitable) default.
+      appBar: AppBar(title: GenericLabel(label: PORTFOLIO_TITLE.i18n(), style: const TextStyle())),
       body: BlocBuilder<PortfolioCubit, PortfolioUiState>(
         builder: (context, state) {
           if (state.isLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return const LoadingView();
           }
           if (state.hasError) {
-            return Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(ERROR_PORTFOLIO.i18n()),
-                  const SizedBox(height: paddingMD),
-                  ElevatedButton(
-                    onPressed: () => context.read<PortfolioCubit>().loadData(),
-                    child: Text(ACTION_RETRY.i18n()),
-                  ),
-                ],
-              ),
+            return ErrorView(
+              message: ERROR_PORTFOLIO.i18n(),
+              onRetry: () => context.read<PortfolioCubit>().loadData(),
             );
           }
 
@@ -74,42 +47,9 @@ class PortfolioPageContent extends StatelessWidget {
               childAspectRatio: 1,
             ),
             itemCount: state.portfolio.length,
-            itemBuilder: (context, index) => _PortfolioCard(item: state.portfolio[index]),
+            itemBuilder: (context, index) => PortfolioGridItem(item: state.portfolio[index]),
           );
         },
-      ),
-    );
-  }
-}
-
-class _PortfolioCard extends StatelessWidget {
-  const _PortfolioCard({required this.item});
-
-  final PortfolioItemModel item;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: white,
-        borderRadius: BorderRadius.circular(borderRadiusXL),
-        border: Border.all(color: athensGray),
-      ),
-      padding: const EdgeInsets.all(paddingMD),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(PortfolioPageContent._iconFor(item.iconKey), size: iconSizeLG, color: carbon500),
-          const SizedBox(height: paddingSM),
-          Text(
-            item.title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: fontSize14, color: black),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
       ),
     );
   }
