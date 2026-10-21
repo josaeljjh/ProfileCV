@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../config/di/service_locator.dart';
+import '../../../config/tools/locale_resolver.dart';
 import 'cubit/projects_cubit.dart';
 import 'projects_page_content.dart';
 
@@ -11,7 +12,7 @@ class ProjectsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<ProjectsCubit>()..loadData(Localizations.localeOf(context)),
+      create: (context) => sl<ProjectsCubit>()..loadData(resolveAppLocale()),
       child: const ProjectsPageContent(),
     );
   }

@@ -4,6 +4,7 @@ import 'package:localization/localization.dart';
 
 import '../../../config/resources/colors.dart';
 import '../../../config/resources/sizes.dart';
+import '../../../config/tools/locale_resolver.dart';
 import '../../../core/resources/translations_constant.dart';
 import 'cubit/skills_cubit.dart';
 import 'cubit/skills_ui_state.dart';
@@ -29,7 +30,7 @@ class SkillsPageContent extends StatelessWidget {
                   Text(ERROR_SKILLS.i18n()),
                   const SizedBox(height: paddingMD),
                   ElevatedButton(
-                    onPressed: () => context.read<SkillsCubit>().loadData(Localizations.localeOf(context)),
+                    onPressed: () => context.read<SkillsCubit>().loadData(resolveAppLocale()),
                     child: Text(ACTION_RETRY.i18n()),
                   ),
                 ],

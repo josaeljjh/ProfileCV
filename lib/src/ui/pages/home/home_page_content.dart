@@ -4,6 +4,7 @@ import 'package:localization/localization.dart';
 
 import '../../../config/resources/colors.dart';
 import '../../../config/resources/sizes.dart';
+import '../../../config/tools/locale_resolver.dart';
 import '../../../core/resources/translations_constant.dart';
 import '../../../domain/models/experience_model.dart';
 import '../../../domain/models/portfolio_item_model.dart';
@@ -84,7 +85,7 @@ class HomePageContent extends StatelessWidget {
                   Text(ERROR_HOME.i18n()),
                   const SizedBox(height: paddingMD),
                   ElevatedButton(
-                    onPressed: () => context.read<HomeCubit>().loadData(Localizations.localeOf(context)),
+                    onPressed: () => context.read<HomeCubit>().loadData(resolveAppLocale()),
                     child: Text(ACTION_RETRY.i18n()),
                   ),
                 ],

@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../config/resources/colors.dart';
 import '../../../config/resources/sizes.dart';
+import '../../../config/tools/locale_resolver.dart';
 import '../../../core/resources/translations_constant.dart';
 import 'cubit/projects_cubit.dart';
 import 'cubit/projects_ui_state.dart';
@@ -37,7 +38,7 @@ class ProjectsPageContent extends StatelessWidget {
                   Text(ERROR_PROJECTS.i18n()),
                   const SizedBox(height: paddingMD),
                   ElevatedButton(
-                    onPressed: () => context.read<ProjectsCubit>().loadData(Localizations.localeOf(context)),
+                    onPressed: () => context.read<ProjectsCubit>().loadData(resolveAppLocale()),
                     child: Text(ACTION_RETRY.i18n()),
                   ),
                 ],
