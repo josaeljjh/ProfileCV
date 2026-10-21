@@ -5,9 +5,12 @@ import 'package:url_launcher/url_launcher.dart';
 class ContactPage extends StatelessWidget {
   const ContactPage({Key? key}) : super(key: key);
 
-  static const String email = 'tu.correo@example.com';
-  static const String phone = '+00 000 000 000';
-  static const String linkedin = 'https://linkedin.com/in/tu-usuario';
+  static const String email = 'josael_jjh@hotmail.com';
+  static const String phone = '+503 7956-8406';
+  static const String linkedinDisplay =
+      'www.linkedin.com/in/josaél-hernández-691790184';
+  static const String linkedinUrl =
+      'https://www.linkedin.com/in/josa%C3%A9l-hern%C3%A1ndez-691790184';
 
   Future<void> _open(Uri uri) async {
     if (await canLaunchUrl(uri)) {
@@ -36,7 +39,7 @@ class ContactPage extends StatelessWidget {
               leading: const Icon(Icons.phone_outlined),
               title: const Text('Teléfono'),
               subtitle: const Text(phone),
-              onTap: () => _open(Uri(scheme: 'tel', path: phone)),
+              onTap: () => _open(Uri(scheme: 'tel', path: phone.replaceAll(' ', ''))),
             ),
           ),
           const SizedBox(height: 8),
@@ -44,8 +47,8 @@ class ContactPage extends StatelessWidget {
             child: ListTile(
               leading: const Icon(Icons.link),
               title: const Text('LinkedIn'),
-              subtitle: const Text(linkedin),
-              onTap: () => _open(Uri.parse(linkedin)),
+              subtitle: const Text(linkedinDisplay),
+              onTap: () => _open(Uri.parse(linkedinUrl)),
             ),
           ),
         ],
