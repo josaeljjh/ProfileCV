@@ -53,7 +53,7 @@ class _AppState extends State<App> {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp(
-      title: "Core Clean",
+      title: "ProfileCV",
       debugShowCheckedModeBanner: kDebugMode ? true : false,
       onGenerateRoute: (settings) => Routes().routes(settings),
       navigatorKey: sl.get<NavigationService>().navigatorKey,

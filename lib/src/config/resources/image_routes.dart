@@ -1,1 +1,1 @@
-const newPlaceHolderImage = "assets/images/news-placeholder.png";
+const defaultPlaceholderImage = "assets/images/placeholder.png";

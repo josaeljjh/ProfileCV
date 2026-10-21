@@ -2,39 +2,22 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import '../../domain/entities/article.dart';
-import '../../ui/features/pages/article_detail/article_detail.dart';
-import '../../ui/features/pages/home/daily_news.dart';
-import '../../ui/features/pages/saved_article/saved_article.dart';
+import '../../ui/features/pages/profile/profile_page.dart';
 
 class Routes {
   static const home = '/';
-  static const articleDetails = '/ArticleDetails';
-  static const savedArticles = '/SavedArticles';
 
   Route routes(RouteSettings settings) {
-    final args = settings.arguments;
-
     switch (settings.name) {
       case home:
         return _createRoute(
           settings,
-              (context) => DailyNews.create(context),
-        );
-      case articleDetails:
-        return _createRoute(
-          settings,
-              (context) => ArticleDetailsView(article: args! as ArticleEntity),
-        );
-      case savedArticles:
-        return _createRoute(
-          settings,
-              (context) => SavedArticles.create(context),
+              (context) => ProfilePage.create(context),
         );
       default:
         _createRoute(
           settings,
-              (context) =>  DailyNews(),
+              (context) => const ProfilePage(),
         );
     }
     throw Exception('This route does not exist');

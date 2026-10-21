@@ -1,2 +1,1 @@
-const errorListArticles = 'There is not any articles now.';
-const tagsNewsImage = 'tagsNewsImage';
+// Generic, reusable app-wide strings go here.

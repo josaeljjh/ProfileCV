@@ -40,7 +40,7 @@ class CustomNetworkImage extends StatelessWidget {
       errorWidget: (context, url, error) => Padding(
         padding: const EdgeInsets.all(16.0),
         child: SvgPicture.asset(
-          newPlaceHolderImage,
+          defaultPlaceholderImage,
           fit: BoxFit.contain,
           theme: const SvgTheme(currentColor: selago),
         ),

@@ -8,7 +8,7 @@ class CornerRadiusImage extends StatelessWidget {
     Key? key,
     this.corner = 0,
     this.imageUrl,
-    this.placeholder = newPlaceHolderImage,
+    this.placeholder = defaultPlaceholderImage,
     this.isAllCorner = true,
     this.cornerTopLeft = 0,
     this.cornerBottomLeft = 0,
