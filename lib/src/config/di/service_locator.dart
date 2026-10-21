@@ -13,6 +13,7 @@ import '../../domain/usecases/get_projects_use_case.dart';
 import '../../domain/usecases/get_skill_groups_use_case.dart';
 import '../../ui/pages/contact/cubit/contact_cubit.dart';
 import '../../ui/pages/home/cubit/home_cubit.dart';
+import '../../ui/pages/portfolio/cubit/portfolio_cubit.dart';
 import '../../ui/pages/projects/cubit/projects_cubit.dart';
 import '../../ui/pages/skills/cubit/skills_cubit.dart';
 import '../routes/navigation_service.dart';
@@ -53,6 +54,7 @@ Future<void> init() async {
         getExperienceUseCase: sl(),
       ));
   sl.registerFactory(() => SkillsCubit(getSkillGroupsUseCase: sl()));
+  sl.registerFactory(() => PortfolioCubit(getPortfolioUseCase: sl()));
   sl.registerFactory(() => ProjectsCubit(getProjectsUseCase: sl()));
   sl.registerFactory(() => ContactCubit(getContactUseCase: sl()));
 }

@@ -9,6 +9,7 @@ import 'package:localization/localization.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import '../config/di/service_locator.dart';
+import '../config/resources/colors.dart';
 import '../config/routes/navigation_service.dart';
 import '../config/routes/routes.dart';
 import '../config/tools/const.dart';
@@ -90,6 +91,13 @@ class _AppState extends State<App> {
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.white,
       ),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        fontFamily: gothamFontFamily,
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: carbon800,
+      ),
+      themeMode: ThemeMode.system,
     );
   }
 }

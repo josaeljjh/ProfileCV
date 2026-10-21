@@ -7,6 +7,8 @@ import '../../../config/resources/sizes.dart';
 import '../../../core/resources/translations_constant.dart';
 import '../../../domain/models/experience_model.dart';
 import '../../../domain/models/portfolio_item_model.dart';
+import '../portfolio/portfolio_page.dart';
+import '../skills/skills_page.dart';
 import 'cubit/home_cubit.dart';
 import 'cubit/home_ui_state.dart';
 
@@ -41,22 +43,6 @@ class HomePageContent extends StatelessWidget {
 
   static Color _colorFor(String key) {
     switch (key) {
-      case 'iceberg':
-        return iceberg;
-      case 'edgeWater':
-        return edgeWater;
-      case 'dirtyPink300':
-        return dirtyPink300;
-      case 'soap400':
-        return soap400;
-      case 'lili300':
-        return lili300;
-      case 'polar':
-        return polar;
-      case 'auxAlert100':
-        return auxAlert100;
-      case 'soap300':
-        return soap300;
       case 'black':
         return black;
       case 'butterflyBush':
@@ -113,15 +99,27 @@ class HomePageContent extends StatelessWidget {
               children: [
                 _buildProfileHeader(state),
                 const SizedBox(height: paddingXXXL),
-                _sectionTitle(SECTION_PORTFOLIO.i18n()),
+                _sectionTitle(
+                  context,
+                  SECTION_PORTFOLIO.i18n(),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const PortfolioPage()),
+                  ),
+                ),
                 const SizedBox(height: paddingMD),
                 _buildPortfolio(state.portfolio),
                 const SizedBox(height: paddingXXXL),
-                _sectionTitle(SECTION_SKILLS.i18n()),
+                _sectionTitle(
+                  context,
+                  SECTION_SKILLS.i18n(),
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const SkillsPage()),
+                  ),
+                ),
                 const SizedBox(height: paddingMD),
                 _buildSkills(state.homeSkills),
                 const SizedBox(height: paddingXXXL),
-                _sectionTitle(SECTION_EXPERIENCE.i18n()),
+                _sectionTitle(context, SECTION_EXPERIENCE.i18n()),
                 const SizedBox(height: paddingSM),
                 _buildExperience(state.experience),
               ],
@@ -171,12 +169,33 @@ class HomePageContent extends StatelessWidget {
     );
   }
 
-  Widget _sectionTitle(String text) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: paddingXL),
-      child: Text(
-        text,
-        style: const TextStyle(fontSize: fontSize20, fontWeight: FontWeight.bold, color: black),
+  Widget _sectionTitle(BuildContext context, String text, {VoidCallback? onTap}) {
+    final title = Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          text,
+          style: const TextStyle(fontSize: fontSize20, fontWeight: FontWeight.bold, color: black),
+        ),
+        if (onTap != null) ...[
+          const SizedBox(width: paddingXS),
+          const Icon(Icons.chevron_right, color: slateGray),
+        ],
+      ],
+    );
+
+    if (onTap == null) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: paddingXL),
+        child: title,
+      );
+    }
+
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: paddingXL, vertical: paddingXS),
+        child: title,
       ),
     );
   }
@@ -201,8 +220,9 @@ class HomePageContent extends StatelessWidget {
                   height: portfolioCardSize,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: _colorFor(item.colorKey),
+                    color: white,
                     borderRadius: BorderRadius.circular(borderRadiusXL),
+                    border: Border.all(color: athensGray),
                   ),
                   child: Icon(_iconFor(item.iconKey), size: iconSizeLG, color: carbon500),
                 ),

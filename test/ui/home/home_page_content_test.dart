@@ -31,7 +31,7 @@ void main() {
     avatarAsset: 'assets/images/profile.jpg',
   );
   const portfolio = [
-    PortfolioItemModel(title: 'N1CO App', iconKey: 'account_balance_wallet_outlined', colorKey: 'iceberg'),
+    PortfolioItemModel(title: 'N1CO App', iconKey: 'account_balance_wallet_outlined'),
   ];
 
   Widget buildTestWidget(HomeUiState state) {
@@ -85,6 +85,10 @@ void main() {
       expect(find.text('Portfolio'), findsOneWidget);
       expect(find.text('Skills'), findsOneWidget);
       expect(find.text('Experiencia'), findsOneWidget);
+      // Portfolio and Skills section titles are tappable shortcuts (chevron
+      // affordance + InkWell); Experiencia has no destination screen.
+      expect(find.byIcon(Icons.chevron_right), findsNWidgets(2));
+      expect(find.byType(InkWell), findsNWidgets(2));
     });
   });
 }

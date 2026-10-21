@@ -58,42 +58,34 @@ class CvRepositoryImpl implements CvRepository {
         PortfolioItemModel(
           title: 'N1CO App',
           iconKey: 'account_balance_wallet_outlined',
-          colorKey: 'iceberg',
         ),
         PortfolioItemModel(
           title: 'N1CO Business',
           iconKey: 'storefront_outlined',
-          colorKey: 'edgeWater',
         ),
         PortfolioItemModel(
           title: 'Hugo App',
           iconKey: 'delivery_dining_outlined',
-          colorKey: 'dirtyPink300',
         ),
         PortfolioItemModel(
           title: 'Scotiabank App',
           iconKey: 'account_balance_outlined',
-          colorKey: 'soap400',
         ),
         PortfolioItemModel(
           title: 'Pagalo App',
           iconKey: 'payments_outlined',
-          colorKey: 'lili300',
         ),
         PortfolioItemModel(
           title: 'AFP Confia',
           iconKey: 'savings_outlined',
-          colorKey: 'polar',
         ),
         PortfolioItemModel(
           title: 'Yummy App',
           iconKey: 'restaurant_outlined',
-          colorKey: 'auxAlert100',
         ),
         PortfolioItemModel(
           title: 'Gourmet Express',
           iconKey: 'fastfood_outlined',
-          colorKey: 'soap300',
         ),
       ];
       return const DataSuccess(portfolio);
