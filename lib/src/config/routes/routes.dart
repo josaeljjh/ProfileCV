@@ -1,8 +1,7 @@
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import '../../ui/pages/home/home_host.dart';
+import '../../ui/pages/dashboard/dashboard_screen.dart';
 
 class Routes {
   static const home = '/';
@@ -12,12 +11,12 @@ class Routes {
       case home:
         return _createRoute(
           settings,
-              (context) => HomeHost.create(context),
+              (context) => DashBoardScreen.create(context),
         );
       default:
         _createRoute(
           settings,
-              (context) => const HomeHost(),
+              (context) => const DashBoardScreen(),
         );
     }
     throw Exception('This route does not exist');

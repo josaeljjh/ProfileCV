@@ -12,6 +12,7 @@ import '../../domain/usecases/get_profile_use_case.dart';
 import '../../domain/usecases/get_projects_use_case.dart';
 import '../../domain/usecases/get_skill_groups_use_case.dart';
 import '../../ui/pages/contact/cubit/contact_cubit.dart';
+import '../../ui/pages/dashboard/cubit/bottom_nav_cubit.dart';
 import '../../ui/pages/home/cubit/home_cubit.dart';
 import '../../ui/pages/portfolio/cubit/portfolio_cubit.dart';
 import '../../ui/pages/projects/cubit/projects_cubit.dart';
@@ -47,6 +48,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetContactUseCase(sl()));
 
   // Cubits
+  sl.registerFactory(() => BottomNavCubit());
   sl.registerFactory(() => HomeCubit(
         getProfileUseCase: sl(),
         getPortfolioUseCase: sl(),

@@ -1,0 +1,79 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:localization/localization.dart';
+
+import '../../../config/di/service_locator.dart';
+import '../../../core/resources/translations_constant.dart';
+import '../contact/contact_page.dart';
+import '../home/home_page.dart';
+import '../projects/projects_page.dart';
+import '../skills/skills_page.dart';
+import 'cubit/bottom_nav_cubit.dart';
+
+/// Hosts the bottom navigation for the CV: Home, Skills, Proyectos and
+/// Contacto. Mirrors PokeAppFlutter's DashBoardScreen pattern: a
+/// BottomNavCubit drives the selected tab and a Material 3 NavigationBar
+/// replaces the old BottomNavigationBar/setState approach.
+///
+/// Unlike PokeAppFlutter's dashboard, each tab here keeps its own
+/// BlocProvider (via HomePage/SkillsPage/ProjectsPage/ContactPage)
+/// instead of having DashBoardScreen eagerly provide every tab's cubit
+/// through a single MultiBlocProvider: Skills and Projects are also
+/// reachable as standalone pushed screens (from Home's tappable section
+/// titles), outside this widget's subtree, so they need to stay
+/// self-contained.
+class DashBoardScreen extends StatelessWidget {
+  const DashBoardScreen({Key? key}) : super(key: key);
+
+  static Widget create(BuildContext context) {
+    return BlocProvider<BottomNavCubit>(
+      create: (_) => sl.get<BottomNavCubit>(),
+      child: const DashBoardScreen(),
+    );
+  }
+
+  static const _pages = [
+    HomePage(),
+    SkillsPage(),
+    ProjectsPage(),
+    ContactPage(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final index = context.watch<BottomNavCubit>().state;
+    return Scaffold(
+      body: IndexedStack(
+        index: index,
+        children: _pages,
+      ),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: index,
+        onDestinationSelected: (selected) =>
+            context.read<BottomNavCubit>().updateIndex(selected),
+        destinations: [
+          NavigationDestination(
+            icon: const Icon(Icons.home_outlined),
+            selectedIcon: const Icon(Icons.home),
+            label: NAV_HOME.i18n(),
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.star_outline),
+            selectedIcon: const Icon(Icons.star),
+            label: NAV_SKILLS.i18n(),
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.code_outlined),
+            selectedIcon: const Icon(Icons.code),
+            label: NAV_PROJECTS.i18n(),
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.mail_outline),
+            selectedIcon: const Icon(Icons.mail),
+            label: NAV_CONTACT.i18n(),
+          ),
+        ],
+      ),
+    );
+  }
+}
