@@ -10,13 +10,24 @@ class _PortfolioItem {
   final Color background;
 }
 
-class _ExperienceItem {
-  const _ExperienceItem(this.company, this.role, this.period, this.description);
+class _Role {
+  const _Role(this.title, this.period, this.duration, this.skills, {this.employmentType});
+
+  final String title;
+  final String? employmentType;
+  final String period;
+  final String duration;
+  final String skills;
+}
+
+class _CompanyExperience {
+  const _CompanyExperience(this.company, this.logoInitials, this.logoColor, this.roles, {this.totalDuration});
 
   final String company;
-  final String role;
-  final String period;
-  final String description;
+  final String logoInitials;
+  final Color logoColor;
+  final String? totalDuration;
+  final List<_Role> roles;
 }
 
 /// "Home" tab: CV summary inspired by the Figma "CV design for mobile" layout -
@@ -52,45 +63,92 @@ class HomePage extends StatelessWidget {
     'Jetpack Compose',
   ];
 
-  static const List<_ExperienceItem> _experience = [
-    _ExperienceItem(
-      'N1co Technologies',
-      'Senior Flutter Engineer | Staff',
-      '2025',
-      'Liderazgo técnico de la app Business: flujos de pago del PDV '
-          '(tap-to-pay, split payments), integración de métodos de pago y '
-          'nuevo diseño Design 3.0.',
+  static const List<_CompanyExperience> _experience = [
+    _CompanyExperience(
+      'n1co',
+      'n1',
+      black,
+      [
+        _Role(
+          'Staff Engineer',
+          'feb. de 2025 - actualidad',
+          '1 año 9 meses',
+          'Claude Code, Flutter y 4 aptitudes más',
+          employmentType: 'Jornada completa',
+        ),
+        _Role(
+          'Senior Flutter Engineer | TechLead',
+          'feb. de 2024 - actualidad',
+          '2 años 9 meses',
+          'Flutter, Clean Architecture y 3 aptitudes más',
+        ),
+        _Role(
+          'Senior Flutter Engineer',
+          'feb. de 2023 - feb. de 2024',
+          '1 año 1 mes',
+          'Flutter, Bloc y 2 aptitudes más',
+        ),
+        _Role(
+          'Senior Android Engineer',
+          'feb. de 2022 - feb. de 2023',
+          '1 año 1 mes',
+          'Jetpack Compose UI, Android y 1 aptitud más',
+          employmentType: 'Jornada completa',
+        ),
+      ],
+      totalDuration: '4 años 9 meses',
     ),
-    _ExperienceItem(
-      'N1co Technologies',
-      'Senior Flutter Engineer | TechLead',
-      '2024 - 2025',
-      'Tech Lead. Flutter, Clean Architecture y liderazgo de equipo en '
-          'desarrollo móvil.',
+    _CompanyExperience(
+      'hugo',
+      'h',
+      butterflyBush,
+      [
+        _Role(
+          'Senior Android Engineer',
+          'ene. de 2021 - feb. de 2022',
+          '1 año 2 meses',
+          'Clean Architecture, Android Jetpack y 1 aptitud más',
+        ),
+      ],
     ),
-    _ExperienceItem(
-      'N1co Technologies',
-      'Senior Flutter Engineer',
-      '2022 - 2023',
-      'Desarrollo móvil Flutter y Bloc con Clean Architecture.',
+    _CompanyExperience(
+      'OE Internacional',
+      'OE',
+      carbon100,
+      [
+        _Role(
+          'Senior Android Developer',
+          'feb. de 2020 - ene. de 2021',
+          '1 año',
+          '',
+        ),
+      ],
     ),
-    _ExperienceItem(
-      'Hugo Technologies',
-      'Senior Android Engineer',
-      '2020 - 2022',
-      'Desarrollo Android con Jetpack Compose y Clean Architecture.',
+    _CompanyExperience(
+      'Elaniin',
+      'E',
+      secondary500,
+      [
+        _Role(
+          'Senior Android Developer',
+          'mar. de 2019 - feb. de 2020',
+          '1 año',
+          '',
+        ),
+      ],
     ),
-    _ExperienceItem(
-      'Elanin',
-      'Senior Android Developer',
-      '2019 - 2020',
-      '1 año en desarrollo de aplicaciones móviles Android.',
-    ),
-    _ExperienceItem(
+    _CompanyExperience(
       'Mobile SV',
-      'Android Developer',
-      '2016 - 2019',
-      '3 años en desarrollo de aplicaciones móviles Android.',
+      'M',
+      carbon400,
+      [
+        _Role(
+          'Android Developer',
+          '2016 - 2019',
+          '3 años',
+          'Jetpack Compose, Clean Architecture',
+        ),
+      ],
     ),
   ];
 
@@ -123,7 +181,7 @@ class HomePage extends StatelessWidget {
             _buildSkills(),
             const SizedBox(height: 28),
             _sectionTitle('Experiencia'),
-            const SizedBox(height: 4),
+            const SizedBox(height: 8),
             _buildExperience(),
           ],
         ),
@@ -244,46 +302,159 @@ class HomePage extends StatelessWidget {
 
   Widget _buildExperience() {
     return Column(
-      children: _experience
-          .map((item) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+      children: [
+        for (int i = 0; i < _experience.length; i++) ...[
+          _buildCompanyBlock(_experience[i]),
+          if (i != _experience.length - 1) const Divider(height: 28, color: athensGray),
+        ],
+      ],
+    );
+  }
+
+  Widget _logoBox(String initials, Color color) {
+    final isDark = ThemeData.estimateBrightnessForColor(color) == Brightness.dark;
+    return Container(
+      width: 44,
+      height: 44,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Text(
+        initials,
+        style: TextStyle(
+          fontSize: 13,
+          fontWeight: FontWeight.bold,
+          color: isDark ? white : black,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCompanyBlock(_CompanyExperience exp) {
+    // A single-role company collapses into one flat entry (logo + role +
+    // company + dates), matching how LinkedIn displays it.
+    if (exp.roles.length == 1) {
+      final role = exp.roles.first;
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _logoBox(exp.logoInitials, exp.logoColor),
+            const SizedBox(width: 12),
+            Expanded(child: _buildRoleDetails(role, exp.company)),
+          ],
+        ),
+      );
+    }
+
+    // Multi-role company: header with logo/name/total duration, then a
+    // dotted timeline of each role at that company.
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _logoBox(exp.logoInitials, exp.logoColor),
+              const SizedBox(width: 12),
+              Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item.role,
-                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: black),
-                              ),
-                              const SizedBox(height: 2),
-                              Text(
-                                item.company,
-                                style: const TextStyle(fontSize: 14, color: slateGray),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Text(
-                          item.period,
-                          style: const TextStyle(fontSize: 14, color: black),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 4),
                     Text(
-                      item.description,
-                      style: const TextStyle(fontSize: 13, color: gray400),
+                      exp.company,
+                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: black),
                     ),
+                    if (exp.totalDuration != null)
+                      Text(
+                        exp.totalDuration!,
+                        style: const TextStyle(fontSize: 13, color: slateGray),
+                      ),
                   ],
                 ),
-              ))
-          .toList(),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          for (int i = 0; i < exp.roles.length; i++)
+            IntrinsicHeight(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 44,
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 8,
+                          height: 8,
+                          margin: const EdgeInsets.only(top: 6),
+                          decoration: const BoxDecoration(color: gray200, shape: BoxShape.circle),
+                        ),
+                        if (i != exp.roles.length - 1)
+                          const Expanded(child: VerticalDivider(width: 1, thickness: 1, color: athensGray)),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: _buildRoleDetails(exp.roles[i], null),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRoleDetails(_Role role, String? companyName) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          role.title,
+          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: black),
+        ),
+        if (companyName != null)
+          Text(
+            companyName,
+            style: const TextStyle(fontSize: 13, color: slateGray),
+          ),
+        if (role.employmentType != null)
+          Text(
+            role.employmentType!,
+            style: const TextStyle(fontSize: 12, color: slateGray),
+          ),
+        Text(
+          '${role.period} · ${role.duration}',
+          style: const TextStyle(fontSize: 12, color: gray400),
+        ),
+        if (role.skills.isNotEmpty) ...[
+          const SizedBox(height: 4),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Icon(Icons.local_offer_outlined, size: 14, color: slateGray),
+              const SizedBox(width: 4),
+              Expanded(
+                child: Text(
+                  role.skills,
+                  style: const TextStyle(fontSize: 12, color: slateGray),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ],
     );
   }
 }
