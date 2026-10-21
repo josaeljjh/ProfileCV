@@ -58,6 +58,8 @@ dev_dependencies:
   retrofit_generator: ^8.0.4
   floor_generator: ^1.4.2
   build_runner: ^2.4.6
+  bloc_test: ^9.1.5
+  mocktail: ^1.0.3
 
 flutter:
   uses-material-design: true

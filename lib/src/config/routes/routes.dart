@@ -2,7 +2,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import '../../ui/features/pages/home/home_host.dart';
+import '../../ui/pages/home/home_host.dart';
 
 class Routes {
   static const home = '/';

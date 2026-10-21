@@ -1,16 +1,15 @@
-import 'package:dio/dio.dart';
-
+/// Generic result wrapper returned by repositories and use cases.
 abstract class DataState<T> {
-  final T ? data;
-  final DioError ? error;
-
   const DataState({this.data, this.error});
+
+  final T? data;
+  final Object? error;
 }
 
 class DataSuccess<T> extends DataState<T> {
   const DataSuccess(T data) : super(data: data);
 }
 
-class DataFailed<T> extends DataState<T> {
-  const DataFailed(DioError error) : super(error: error);
+class DataError<T> extends DataState<T> {
+  const DataError(Object error) : super(error: error);
 }
