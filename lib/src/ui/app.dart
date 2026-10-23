@@ -10,6 +10,7 @@ import 'package:responsive_framework/responsive_framework.dart';
 
 import '../config/di/service_locator.dart';
 import '../config/resources/colors.dart';
+import '../config/resources/sizes.dart';
 import '../config/routes/navigation_service.dart';
 import '../config/routes/routes.dart';
 import '../config/tools/const.dart';
@@ -100,9 +101,24 @@ class _AppState extends State<App> {
             .copyWith(surface: white, surfaceTint: Colors.transparent),
         appBarTheme: const AppBarTheme(backgroundColor: white, surfaceTintColor: Colors.transparent),
         cardTheme: const CardThemeData(color: white, surfaceTintColor: Colors.transparent),
-        navigationBarTheme: const NavigationBarThemeData(
+        navigationBarTheme: NavigationBarThemeData(
           backgroundColor: white,
           surfaceTintColor: Colors.transparent,
+          // No pill behind the selected tab - tapping just shows the
+          // ordinary ripple/splash instead of a lingering highlight.
+          indicatorColor: Colors.transparent,
+          iconTheme: WidgetStateProperty.resolveWith(
+            (states) => IconThemeData(
+              color: states.contains(WidgetState.selected) ? niagara : carbon500,
+              size: states.contains(WidgetState.selected) ? navIconSizeSelected : navIconSize,
+            ),
+          ),
+          labelTextStyle: WidgetStateProperty.resolveWith(
+            (states) => TextStyle(
+              fontSize: fontSize12,
+              color: states.contains(WidgetState.selected) ? niagara : carbon500,
+            ),
+          ),
         ),
       ),
       darkTheme: ThemeData(
@@ -114,9 +130,22 @@ class _AppState extends State<App> {
             .copyWith(surface: carbon800, surfaceTint: Colors.transparent),
         appBarTheme: const AppBarTheme(backgroundColor: carbon800, surfaceTintColor: Colors.transparent),
         cardTheme: const CardThemeData(color: carbon700, surfaceTintColor: Colors.transparent),
-        navigationBarTheme: const NavigationBarThemeData(
+        navigationBarTheme: NavigationBarThemeData(
           backgroundColor: carbon800,
           surfaceTintColor: Colors.transparent,
+          indicatorColor: Colors.transparent,
+          iconTheme: WidgetStateProperty.resolveWith(
+            (states) => IconThemeData(
+              color: states.contains(WidgetState.selected) ? niagara : gray100,
+              size: states.contains(WidgetState.selected) ? navIconSizeSelected : navIconSize,
+            ),
+          ),
+          labelTextStyle: WidgetStateProperty.resolveWith(
+            (states) => TextStyle(
+              fontSize: fontSize12,
+              color: states.contains(WidgetState.selected) ? niagara : gray100,
+            ),
+          ),
         ),
       ),
       themeMode: ThemeMode.system,

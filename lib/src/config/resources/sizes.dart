@@ -37,6 +37,10 @@ const double iconSizeMD = 18;
 const double iconSizeLG = 40;
 const double iconSizeXL = 44;
 
+/// Bottom nav icon sizes: the selected tab's icon is drawn a bit larger.
+const double navIconSize = 24;
+const double navIconSizeSelected = 28;
+
 /// Avatar / logo box sizes
 const double avatarRadiusSM = 20;
 const double avatarRadiusLG = 60;
