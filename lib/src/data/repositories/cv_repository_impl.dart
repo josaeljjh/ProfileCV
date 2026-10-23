@@ -127,6 +127,7 @@ class CvRepositoryImpl implements CvRepository {
       company: 'n1co',
       logoInitials: 'n1',
       logoColorKey: 'black',
+      logoAsset: 'assets/images/logos/n1co.jpg',
       totalDuration: '4 años 9 meses',
       roles: [
         RoleModel(
@@ -161,6 +162,7 @@ class CvRepositoryImpl implements CvRepository {
       company: 'hugo',
       logoInitials: 'h',
       logoColorKey: 'butterflyBush',
+      logoAsset: 'assets/images/logos/hugo.jpg',
       roles: [
         RoleModel(
           title: 'Senior Android Engineer',
@@ -174,6 +176,7 @@ class CvRepositoryImpl implements CvRepository {
       company: 'OE Internacional',
       logoInitials: 'OE',
       logoColorKey: 'carbon100',
+      logoAsset: 'assets/images/logos/oe_internacional.jpg',
       roles: [
         RoleModel(
           title: 'Senior Android Developer',
@@ -187,6 +190,7 @@ class CvRepositoryImpl implements CvRepository {
       company: 'Elaniin',
       logoInitials: 'E',
       logoColorKey: 'secondary500',
+      logoAsset: 'assets/images/logos/elaniin.jpg',
       roles: [
         RoleModel(
           title: 'Senior Android Developer',
@@ -200,6 +204,7 @@ class CvRepositoryImpl implements CvRepository {
       company: 'Mobile SV',
       logoInitials: 'M',
       logoColorKey: 'carbon400',
+      logoAsset: 'assets/images/logos/mobile_sv.png',
       roles: [
         RoleModel(
           title: 'Android Developer',
@@ -216,6 +221,7 @@ class CvRepositoryImpl implements CvRepository {
       company: 'n1co',
       logoInitials: 'n1',
       logoColorKey: 'black',
+      logoAsset: 'assets/images/logos/n1co.jpg',
       totalDuration: '4 years 9 months',
       roles: [
         RoleModel(
@@ -250,6 +256,7 @@ class CvRepositoryImpl implements CvRepository {
       company: 'hugo',
       logoInitials: 'h',
       logoColorKey: 'butterflyBush',
+      logoAsset: 'assets/images/logos/hugo.jpg',
       roles: [
         RoleModel(
           title: 'Senior Android Engineer',
@@ -263,6 +270,7 @@ class CvRepositoryImpl implements CvRepository {
       company: 'OE Internacional',
       logoInitials: 'OE',
       logoColorKey: 'carbon100',
+      logoAsset: 'assets/images/logos/oe_internacional.jpg',
       roles: [
         RoleModel(
           title: 'Senior Android Developer',
@@ -276,6 +284,7 @@ class CvRepositoryImpl implements CvRepository {
       company: 'Elaniin',
       logoInitials: 'E',
       logoColorKey: 'secondary500',
+      logoAsset: 'assets/images/logos/elaniin.jpg',
       roles: [
         RoleModel(
           title: 'Senior Android Developer',
@@ -289,6 +298,7 @@ class CvRepositoryImpl implements CvRepository {
       company: 'Mobile SV',
       logoInitials: 'M',
       logoColorKey: 'carbon400',
+      logoAsset: 'assets/images/logos/mobile_sv.png',
       roles: [
         RoleModel(
           title: 'Android Developer',

@@ -70,6 +70,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/logos/
     - res/i18n/
 
   fonts:

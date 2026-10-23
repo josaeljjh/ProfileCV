@@ -46,13 +46,28 @@ class ExperienceTimeline extends StatelessWidget {
 }
 
 class _LogoBox extends StatelessWidget {
-  const _LogoBox({required this.initials, required this.colorKey});
+  const _LogoBox({required this.initials, required this.colorKey, this.logoAsset});
 
   final String initials;
   final String colorKey;
+  final String? logoAsset;
 
   @override
   Widget build(BuildContext context) {
+    if (logoAsset != null) {
+      final colors = AppColors.of(context);
+      return Container(
+        width: iconSizeXL,
+        height: iconSizeXL,
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(borderRadiusSM),
+          border: Border.all(color: colors.divider),
+        ),
+        child: Image.asset(logoAsset!, fit: BoxFit.cover),
+      );
+    }
+
     final color = _logoColorFor(colorKey);
     final isDark = ThemeData.estimateBrightnessForColor(color) == Brightness.dark;
     return Container(
@@ -153,7 +168,7 @@ class _CompanyBlock extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _LogoBox(initials: company.logoInitials, colorKey: company.logoColorKey),
+            _LogoBox(initials: company.logoInitials, colorKey: company.logoColorKey, logoAsset: company.logoAsset),
             const SizedBox(width: paddingMD),
             Expanded(child: _RoleDetails(role: role, companyName: company.company)),
           ],
@@ -171,7 +186,7 @@ class _CompanyBlock extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _LogoBox(initials: company.logoInitials, colorKey: company.logoColorKey),
+              _LogoBox(initials: company.logoInitials, colorKey: company.logoColorKey, logoAsset: company.logoAsset),
               const SizedBox(width: paddingMD),
               Expanded(
                 child: Column(

@@ -20,7 +20,9 @@ class RoleModel extends Equatable {
 }
 
 /// [logoColorKey] is a plain string identifier resolved to a Color only in
-/// the UI layer, keeping the domain layer Flutter-free.
+/// the UI layer, keeping the domain layer Flutter-free. [logoAsset], when
+/// set, is the company's real logo image and takes priority over the
+/// initials+color placeholder.
 class CompanyExperienceModel extends Equatable {
   const CompanyExperienceModel({
     required this.company,
@@ -28,14 +30,16 @@ class CompanyExperienceModel extends Equatable {
     required this.logoColorKey,
     required this.roles,
     this.totalDuration,
+    this.logoAsset,
   });
 
   final String company;
   final String logoInitials;
   final String logoColorKey;
+  final String? logoAsset;
   final String? totalDuration;
   final List<RoleModel> roles;
 
   @override
-  List<Object?> get props => [company, logoInitials, logoColorKey, totalDuration, roles];
+  List<Object?> get props => [company, logoInitials, logoColorKey, logoAsset, totalDuration, roles];
 }
