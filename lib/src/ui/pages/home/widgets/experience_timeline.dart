@@ -133,7 +133,7 @@ class _RoleDetails extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(Icons.local_offer_outlined, size: iconSizeXS, color: colors.textSecondary),
+              Icon(Icons.local_offer_rounded, size: iconSizeXS, color: colors.textSecondary),
               const SizedBox(width: paddingXS),
               Expanded(
                 child: GenericLabel(

@@ -26,7 +26,7 @@ class SectionTitle extends StatelessWidget {
         ),
         if (onTap != null) ...[
           const SizedBox(width: paddingXS),
-          Icon(Icons.chevron_right, color: colors.textSecondary),
+          Icon(Icons.chevron_right_rounded, color: colors.textSecondary),
         ],
       ],
     );

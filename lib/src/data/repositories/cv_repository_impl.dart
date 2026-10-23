@@ -490,7 +490,7 @@ class CvRepositoryImpl implements CvRepository {
         email: 'josael_jjh@hotmail.com',
         phone: '+503 7956-8406',
         linkedinDisplay: 'www.linkedin.com/in/josaél-hernández-691790184',
-        linkedinUrl: 'https://www.linkedin.com/in/josa%C3%A9l-hern%C3%A1ndez-691790184',
+        linkedinUrl: 'https://www.linkedin.com/in/josa%C3%A9l-hern%C3%A1ndez-691790184/',
         githubUrl: 'https://github.com/josaeljjh',
         cvDownloadUrl:
             'https://drive.google.com/file/d/1Y2RcauoagE8vIKHo_G8sv2RsTYjs0rI5/view?usp=sharing',

@@ -59,28 +59,28 @@ class DashBoardScreen extends StatelessWidget {
             context.read<BottomNavCubit>().updateIndex(selected),
         destinations: [
           NavigationDestination(
-            icon: const Icon(Icons.home_outlined),
-            selectedIcon: const Icon(Icons.home),
+            icon: const Icon(Icons.home_rounded),
+            selectedIcon: const Icon(Icons.home_rounded),
             label: NAV_HOME.i18n(),
           ),
           NavigationDestination(
-            icon: const Icon(Icons.apps_outlined),
-            selectedIcon: const Icon(Icons.apps),
+            icon: const Icon(Icons.apps_rounded),
+            selectedIcon: const Icon(Icons.apps_rounded),
             label: NAV_PORTFOLIO.i18n(),
           ),
           NavigationDestination(
-            icon: const Icon(Icons.star_outline),
-            selectedIcon: const Icon(Icons.star),
+            icon: const Icon(Icons.star_rounded),
+            selectedIcon: const Icon(Icons.star_rounded),
             label: NAV_SKILLS.i18n(),
           ),
           NavigationDestination(
-            icon: const Icon(Icons.code_outlined),
-            selectedIcon: const Icon(Icons.code),
+            icon: const Icon(Icons.code_rounded),
+            selectedIcon: const Icon(Icons.code_rounded),
             label: NAV_PROJECTS.i18n(),
           ),
           NavigationDestination(
-            icon: const Icon(Icons.mail_outline),
-            selectedIcon: const Icon(Icons.mail),
+            icon: const Icon(Icons.mail_rounded),
+            selectedIcon: const Icon(Icons.mail_rounded),
             label: NAV_CONTACT.i18n(),
           ),
         ],

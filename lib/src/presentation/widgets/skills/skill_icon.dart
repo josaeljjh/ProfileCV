@@ -14,25 +14,25 @@ IconData skillIconFor(String skill) {
     case 'Unit Test in Flutter with Mockito':
       return Icons.flutter_dash;
     case 'Dart':
-      return Icons.code;
+      return Icons.code_rounded;
     case 'Senior Android Engineer':
     case 'Kotlin':
       return Icons.android;
     case 'Jetpack Compose':
-      return Icons.widgets_outlined;
+      return Icons.widgets_rounded;
     case 'Coroutines/Flow':
-      return Icons.sync;
+      return Icons.sync_rounded;
     case 'Kotlin Multiplatform':
-      return Icons.devices_outlined;
+      return Icons.devices_rounded;
     case 'Clean Architecture':
-      return Icons.architecture_outlined;
+      return Icons.architecture_rounded;
     case 'Realm and Room':
-      return Icons.storage_outlined;
+      return Icons.storage_rounded;
     case 'IA con Claude Code':
     case 'AI with Claude Code':
-      return Icons.smart_toy_outlined;
+      return Icons.smart_toy_rounded;
     case 'Dependency Injection':
-      return Icons.account_tree_outlined;
+      return Icons.account_tree_rounded;
     case 'Swift / SwiftUI':
       return Icons.apple;
   }
@@ -41,11 +41,11 @@ IconData skillIconFor(String skill) {
   if (lower.contains('flutter')) return Icons.flutter_dash;
   if (lower.contains('android') || lower.contains('kotlin')) return Icons.android;
   if (lower.contains('swift') || lower.contains('ios')) return Icons.apple;
-  if (lower.contains('test') || lower.contains('mock')) return Icons.bug_report_outlined;
-  if (lower.contains('architecture')) return Icons.architecture_outlined;
+  if (lower.contains('test') || lower.contains('mock')) return Icons.bug_report_rounded;
+  if (lower.contains('architecture')) return Icons.architecture_rounded;
   if (lower.contains('database') || lower.contains('room') || lower.contains('realm')) {
-    return Icons.storage_outlined;
+    return Icons.storage_rounded;
   }
-  if (lower.contains('ai') || lower.contains('claude')) return Icons.smart_toy_outlined;
-  return Icons.code;
+  if (lower.contains('ai') || lower.contains('claude')) return Icons.smart_toy_rounded;
+  return Icons.code_rounded;
 }

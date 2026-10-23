@@ -16,7 +16,7 @@ class ProjectTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        leading: const Icon(Icons.code, color: niagara),
+        leading: const Icon(Icons.code_rounded, color: niagara),
         title: GenericLabel(
           label: project.name,
           lines: null,
@@ -37,7 +37,7 @@ class ProjectTile extends StatelessWidget {
             ),
           ],
         ),
-        trailing: const Icon(Icons.open_in_new, size: iconSizeMD, color: slateGray),
+        trailing: const Icon(Icons.open_in_new_rounded, size: iconSizeMD, color: slateGray),
         isThreeLine: true,
         onTap: onTap,
       ),
