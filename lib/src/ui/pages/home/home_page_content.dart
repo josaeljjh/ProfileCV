@@ -8,7 +8,6 @@ import '../../../config/tools/locale_resolver.dart';
 import '../../../core/resources/translations_constant.dart';
 import '../../../presentation/widgets/feedback/error_view.dart';
 import '../../../presentation/widgets/feedback/loading_view.dart';
-import '../../../presentation/widgets/text/generic_label.dart';
 import '../portfolio/portfolio_page.dart';
 import '../skills/skills_page.dart';
 import 'cubit/home_cubit.dart';
@@ -57,16 +56,6 @@ class HomePageContent extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: paddingXXL),
-                        child: GenericLabel(
-                          label: profile.objective,
-                          lines: 4,
-                          softWrap: true,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: fontSize13, color: gray400),
-                        ),
-                      ),
                       const SizedBox(height: paddingXXXL),
                       SectionTitle(
                         text: SECTION_PORTFOLIO.i18n(),

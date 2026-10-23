@@ -41,6 +41,6 @@ const double iconSizeXL = 44;
 const double avatarRadiusSM = 20;
 const double avatarRadiusLG = 60;
 const double collapsedHeaderHeight = 56;
-const double expandedHeaderHeight = 260;
+const double expandedHeaderHeight = 340;
 const double portfolioCardSize = 150;
 const double portfolioCarouselHeight = 190;
