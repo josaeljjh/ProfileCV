@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../config/resources/colors.dart';
 import '../../../../config/resources/sizes.dart';
+import '../../../../config/theme/app_theme.dart';
 import '../../../../domain/models/experience_model.dart';
 import '../../../../presentation/widgets/text/generic_label.dart';
 
@@ -36,7 +37,7 @@ class ExperienceTimeline extends StatelessWidget {
       children: [
         for (int i = 0; i < experience.length; i++) ...[
           _CompanyBlock(company: experience[i]),
-          if (i != experience.length - 1) const Divider(height: paddingXXXL, color: athensGray),
+          if (i != experience.length - 1) Divider(height: paddingXXXL, color: context.colors.divider),
         ],
       ],
     );
@@ -88,41 +89,41 @@ class _RoleDetails extends StatelessWidget {
           label: role.title,
           lines: null,
           softWrap: true,
-          style: const TextStyle(fontSize: fontSize15, fontWeight: FontWeight.bold, color: black),
+          style: TextStyle(fontSize: fontSize15, fontWeight: FontWeight.bold, color: context.colors.textPrimary),
         ),
         if (companyName != null)
           GenericLabel(
             label: companyName!,
             lines: null,
             softWrap: true,
-            style: const TextStyle(fontSize: fontSize13, color: slateGray),
+            style: TextStyle(fontSize: fontSize13, color: context.colors.textSecondary),
           ),
         if (role.employmentType != null)
           GenericLabel(
             label: role.employmentType!,
             lines: null,
             softWrap: true,
-            style: const TextStyle(fontSize: fontSize12, color: slateGray),
+            style: TextStyle(fontSize: fontSize12, color: context.colors.textSecondary),
           ),
         GenericLabel(
           label: '${role.period} · ${role.duration}',
           lines: null,
           softWrap: true,
-          style: const TextStyle(fontSize: fontSize12, color: gray400),
+          style: TextStyle(fontSize: fontSize12, color: context.colors.textTertiary),
         ),
         if (role.skills.isNotEmpty) ...[
           const SizedBox(height: paddingXS),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(Icons.local_offer_outlined, size: iconSizeXS, color: slateGray),
+              Icon(Icons.local_offer_outlined, size: iconSizeXS, color: context.colors.iconMuted),
               const SizedBox(width: paddingXS),
               Expanded(
                 child: GenericLabel(
                   label: role.skills,
                   lines: null,
                   softWrap: true,
-                  style: const TextStyle(fontSize: fontSize12, color: slateGray),
+                  style: TextStyle(fontSize: fontSize12, color: context.colors.textSecondary),
                 ),
               ),
             ],
@@ -177,14 +178,14 @@ class _CompanyBlock extends StatelessWidget {
                       label: company.company,
                       lines: null,
                       softWrap: true,
-                      style: const TextStyle(fontSize: fontSize16, fontWeight: FontWeight.bold, color: black),
+                      style: TextStyle(fontSize: fontSize16, fontWeight: FontWeight.bold, color: context.colors.textPrimary),
                     ),
                     if (company.totalDuration != null)
                       GenericLabel(
                         label: company.totalDuration!,
                         lines: null,
                         softWrap: true,
-                        style: const TextStyle(fontSize: fontSize13, color: slateGray),
+                        style: TextStyle(fontSize: fontSize13, color: context.colors.textSecondary),
                       ),
                   ],
                 ),
@@ -205,10 +206,10 @@ class _CompanyBlock extends StatelessWidget {
                           width: paddingSM,
                           height: paddingSM,
                           margin: const EdgeInsets.only(top: paddingXS + 2),
-                          decoration: const BoxDecoration(color: gray200, shape: BoxShape.circle),
+                          decoration: BoxDecoration(color: context.colors.iconMuted, shape: BoxShape.circle),
                         ),
                         if (i != company.roles.length - 1)
-                          const Expanded(child: VerticalDivider(width: 1, thickness: 1, color: athensGray)),
+                          Expanded(child: VerticalDivider(width: 1, thickness: 1, color: context.colors.divider)),
                       ],
                     ),
                   ),

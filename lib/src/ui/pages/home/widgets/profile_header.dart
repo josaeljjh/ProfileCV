@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../config/resources/colors.dart';
 import '../../../../config/resources/sizes.dart';
+import '../../../../config/theme/app_theme.dart';
 import '../../../../domain/models/profile_model.dart';
 import '../../../../presentation/widgets/text/generic_label.dart';
 
@@ -29,7 +30,7 @@ class ProfileHeader extends StatelessWidget {
               lines: null,
               softWrap: true,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: fontSize22, fontWeight: FontWeight.bold, color: black),
+              style: TextStyle(fontSize: fontSize22, fontWeight: FontWeight.bold, color: context.colors.textPrimary),
             ),
             const SizedBox(height: paddingXS),
             GenericLabel(
@@ -37,14 +38,14 @@ class ProfileHeader extends StatelessWidget {
               lines: null,
               softWrap: true,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: fontSize15, color: slateGray),
+              style: TextStyle(fontSize: fontSize15, color: context.colors.textSecondary),
             ),
             GenericLabel(
               label: profile.location,
               lines: null,
               softWrap: true,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: fontSize15, color: slateGray),
+              style: TextStyle(fontSize: fontSize15, color: context.colors.textSecondary),
             ),
             const SizedBox(height: paddingLG),
             GenericLabel(
@@ -52,7 +53,7 @@ class ProfileHeader extends StatelessWidget {
               lines: null,
               softWrap: true,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: fontSize13, color: gray400),
+              style: TextStyle(fontSize: fontSize13, color: context.colors.textTertiary),
             ),
           ],
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../config/resources/colors.dart';
 import '../../../../config/resources/sizes.dart';
+import '../../../../config/theme/app_theme.dart';
 import '../../../../domain/models/portfolio_item_model.dart';
 import '../../../../presentation/widgets/portfolio/portfolio_icon.dart';
 import '../../../../presentation/widgets/text/generic_label.dart';
@@ -20,15 +20,15 @@ class PortfolioGridItem extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: white,
+        color: context.colors.surface,
         borderRadius: BorderRadius.circular(borderRadiusXL),
-        border: Border.all(color: athensGray),
+        border: Border.all(color: context.colors.border),
       ),
       padding: const EdgeInsets.all(paddingMD),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(portfolioIconFor(item.iconKey), size: iconSizeLG, color: carbon500),
+          Icon(portfolioIconFor(item.iconKey), size: iconSizeLG, color: context.colors.iconStrong),
           const SizedBox(height: paddingSM),
           GenericLabel(
             label: item.title,
@@ -36,7 +36,7 @@ class PortfolioGridItem extends StatelessWidget {
             softWrap: true,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: fontSize14, color: black),
+            style: TextStyle(fontSize: fontSize14, color: context.colors.textPrimary),
           ),
         ],
       ),

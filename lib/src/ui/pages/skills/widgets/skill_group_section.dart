@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../config/resources/colors.dart';
 import '../../../../config/resources/sizes.dart';
+import '../../../../config/theme/app_theme.dart';
 import '../../../../domain/models/skill_group_model.dart';
 import '../../../../presentation/widgets/text/generic_label.dart';
 
@@ -23,7 +24,7 @@ class SkillGroupSection extends StatelessWidget {
             label: group.category,
             lines: null,
             softWrap: true,
-            style: const TextStyle(fontSize: fontSize17, fontWeight: FontWeight.bold, color: black),
+            style: TextStyle(fontSize: fontSize17, fontWeight: FontWeight.bold, color: context.colors.textPrimary),
           ),
           const SizedBox(height: paddingSM + 2),
           Wrap(
@@ -33,7 +34,7 @@ class SkillGroupSection extends StatelessWidget {
                 .map((skill) => Container(
                       padding: const EdgeInsets.symmetric(horizontal: paddingMD + 2, vertical: paddingSM + 2),
                       decoration: BoxDecoration(
-                        color: athensGray,
+                        color: context.colors.surfaceVariant,
                         borderRadius: BorderRadius.circular(borderRadiusMD),
                       ),
                       child: Row(

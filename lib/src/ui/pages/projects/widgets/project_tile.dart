@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../config/resources/colors.dart';
 import '../../../../config/resources/sizes.dart';
+import '../../../../config/theme/app_theme.dart';
 import '../../../../domain/models/project_model.dart';
 import '../../../../presentation/widgets/text/generic_label.dart';
 
@@ -33,11 +34,11 @@ class ProjectTile extends StatelessWidget {
               label: project.tech,
               lines: null,
               softWrap: true,
-              style: const TextStyle(fontSize: fontSize12, color: slateGray),
+              style: TextStyle(fontSize: fontSize12, color: context.colors.textSecondary),
             ),
           ],
         ),
-        trailing: const Icon(Icons.open_in_new, size: iconSizeMD, color: slateGray),
+        trailing: Icon(Icons.open_in_new, size: iconSizeMD, color: context.colors.iconMuted),
         isThreeLine: true,
         onTap: onTap,
       ),

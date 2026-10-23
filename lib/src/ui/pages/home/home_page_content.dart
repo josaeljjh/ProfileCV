@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization/localization.dart';
 
-import '../../../config/resources/colors.dart';
 import '../../../config/resources/sizes.dart';
+import '../../../config/theme/app_theme.dart';
 import '../../../config/tools/locale_resolver.dart';
 import '../../../core/resources/translations_constant.dart';
 import '../../../presentation/widgets/feedback/error_view.dart';
@@ -29,14 +29,10 @@ class HomePageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
       appBar: AppBar(
-        backgroundColor: white,
-        elevation: 0,
-        centerTitle: true,
         title: GenericLabel(
           label: CV_TITLE.i18n(),
-          style: const TextStyle(color: black, fontWeight: FontWeight.bold),
+          style: TextStyle(color: context.colors.textPrimary, fontWeight: FontWeight.bold),
         ),
       ),
       body: BlocBuilder<HomeCubit, HomeUiState>(

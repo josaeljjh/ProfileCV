@@ -9,10 +9,9 @@ import 'package:localization/localization.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import '../config/di/service_locator.dart';
-import '../config/resources/colors.dart';
 import '../config/routes/navigation_service.dart';
 import '../config/routes/routes.dart';
-import '../config/tools/const.dart';
+import '../config/theme/app_theme.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -85,18 +84,8 @@ class _AppState extends State<App> {
           const Breakpoint(start: 1921, end: double.infinity, name: '4K'),
         ],
       ),
-      theme: ThemeData(
-        useMaterial3: true,
-        fontFamily: gothamFontFamily,
-        brightness: Brightness.light,
-        scaffoldBackgroundColor: white,
-      ),
-      darkTheme: ThemeData(
-        useMaterial3: true,
-        fontFamily: gothamFontFamily,
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: carbon800,
-      ),
+      theme: lightTheme(),
+      darkTheme: darkTheme(),
       themeMode: ThemeMode.system,
     );
   }

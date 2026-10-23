@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../config/resources/colors.dart';
 import '../../../../config/resources/sizes.dart';
+import '../../../../config/theme/app_theme.dart';
 import '../../../../presentation/widgets/text/generic_label.dart';
 
 /// A section heading on Home. When [onTap] is given it renders as a
@@ -21,11 +21,11 @@ class SectionTitle extends StatelessWidget {
       children: [
         GenericLabel(
           label: text,
-          style: const TextStyle(fontSize: fontSize20, fontWeight: FontWeight.bold, color: black),
+          style: TextStyle(fontSize: fontSize20, fontWeight: FontWeight.bold, color: context.colors.textPrimary),
         ),
         if (onTap != null) ...[
           const SizedBox(width: paddingXS),
-          const Icon(Icons.chevron_right, color: slateGray),
+          Icon(Icons.chevron_right, color: context.colors.iconMuted),
         ],
       ],
     );

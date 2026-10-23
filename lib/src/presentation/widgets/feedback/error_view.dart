@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:localization/localization.dart';
 
-import '../../../config/resources/colors.dart';
 import '../../../config/resources/sizes.dart';
+import '../../../config/theme/app_theme.dart';
 import '../../../core/resources/translations_constant.dart';
 import '../text/generic_label.dart';
 
@@ -27,14 +27,17 @@ class ErrorView extends StatelessWidget {
               lines: null,
               softWrap: true,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: fontSize14, color: black),
+              style: TextStyle(fontSize: fontSize14, color: context.colors.textPrimary),
             ),
             const SizedBox(height: paddingMD),
             ElevatedButton(
               onPressed: onRetry,
+              // No explicit color: it inherits the button's own foreground
+              // color (colorScheme.onPrimary), which is already legible
+              // against the button's background in both themes.
               child: GenericLabel(
                 label: ACTION_RETRY.i18n(),
-                style: const TextStyle(fontSize: fontSize14, color: white),
+                style: const TextStyle(fontSize: fontSize14),
               ),
             ),
           ],
