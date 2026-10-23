@@ -8,8 +8,8 @@ import '../../../config/tools/locale_resolver.dart';
 import '../../../core/resources/translations_constant.dart';
 import '../../../presentation/widgets/feedback/error_view.dart';
 import '../../../presentation/widgets/feedback/loading_view.dart';
-import '../portfolio/portfolio_page.dart';
-import '../skills/skills_page.dart';
+import '../dashboard/cubit/bottom_nav_cubit.dart';
+import '../dashboard/dashboard_screen.dart';
 import 'cubit/home_cubit.dart';
 import 'cubit/home_ui_state.dart';
 import 'widgets/experience_timeline.dart';
@@ -63,18 +63,18 @@ class HomePageContent extends StatelessWidget {
                       const SizedBox(height: paddingXXXL),
                       SectionTitle(
                         text: SECTION_PORTFOLIO.i18n(),
-                        onTap: () => Navigator.of(context).push(
-                          MaterialPageRoute(builder: (_) => const PortfolioPage()),
-                        ),
+                        onTap: () => context
+                            .read<BottomNavCubit>()
+                            .updateIndex(DashBoardScreen.portfolioIndex),
                       ),
                       const SizedBox(height: paddingMD),
                       PortfolioCarousel(portfolio: state.portfolio),
                       const SizedBox(height: paddingXXXL),
                       SectionTitle(
                         text: SECTION_SKILLS.i18n(),
-                        onTap: () => Navigator.of(context).push(
-                          MaterialPageRoute(builder: (_) => const SkillsPage()),
-                        ),
+                        onTap: () => context
+                            .read<BottomNavCubit>()
+                            .updateIndex(DashBoardScreen.skillsIndex),
                       ),
                       const SizedBox(height: paddingMD),
                       HomeSkillsChips(skills: state.homeSkills),

@@ -19,10 +19,8 @@ import 'cubit/bottom_nav_cubit.dart';
 /// Unlike PokeAppFlutter's dashboard, each tab here keeps its own
 /// BlocProvider (via HomePage/PortfolioPage/SkillsPage/ProjectsPage/
 /// ContactPage) instead of having DashBoardScreen eagerly provide every
-/// tab's cubit through a single MultiBlocProvider: Portfolio and Skills
-/// are also reachable as standalone pushed screens (from Home's tappable
-/// section titles), outside this widget's subtree, so they need to stay
-/// self-contained.
+/// tab's cubit through a single MultiBlocProvider - simpler to keep each
+/// tab self-contained than to restructure around one shared provider.
 class DashBoardScreen extends StatelessWidget {
   const DashBoardScreen({Key? key}) : super(key: key);
 
@@ -32,6 +30,12 @@ class DashBoardScreen extends StatelessWidget {
       child: const DashBoardScreen(),
     );
   }
+
+  /// Tab indices, shared with Home's tappable "Portfolio"/"Skills" section
+  /// titles so tapping them switches tabs in place via BottomNavCubit
+  /// instead of pushing a new screen on top.
+  static const int portfolioIndex = 1;
+  static const int skillsIndex = 2;
 
   static const _pages = [
     HomePage(),

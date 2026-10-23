@@ -13,10 +13,12 @@ import 'cubit/portfolio_cubit.dart';
 import 'cubit/portfolio_ui_state.dart';
 import 'widgets/portfolio_grid_item.dart';
 
-/// "Portfolio" screen: the full list of apps/projects, reached by tapping
-/// Home's "Portfolio" section title. Same plain-white card treatment as
-/// the Home carousel, just laid out as a scrollable grid instead of a
-/// horizontal strip since this is the "see everything" screen.
+/// "Portfolio" screen: the full list of apps/projects. Reached either as
+/// its own dashboard tab or by tapping Home's "Portfolio" section title
+/// (which switches to this tab in place via BottomNavCubit). Same
+/// plain-white card treatment as the Home carousel, just laid out as a
+/// scrollable grid instead of a horizontal strip since this is the "see
+/// everything" screen.
 class PortfolioPageContent extends StatelessWidget {
   const PortfolioPageContent({Key? key}) : super(key: key);
 
