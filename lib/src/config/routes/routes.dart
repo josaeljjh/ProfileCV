@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../ui/pages/dashboard/dashboard_screen.dart';
 
@@ -26,7 +25,7 @@ class Routes {
       RouteSettings? settings,
       Widget Function(BuildContext context) predicated,
       ) {
-    if (Platform.isIOS) {
+    if (!kIsWeb && defaultTargetPlatform == TargetPlatform.iOS) {
       return MaterialPageRoute(
           builder: (context) => predicated(context), settings: settings);
     }
