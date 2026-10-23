@@ -13,11 +13,10 @@ import '../portfolio/portfolio_page.dart';
 import '../skills/skills_page.dart';
 import 'cubit/home_cubit.dart';
 import 'cubit/home_ui_state.dart';
-import 'widgets/compact_profile_header.dart';
 import 'widgets/experience_timeline.dart';
+import 'widgets/home_header_delegate.dart';
 import 'widgets/home_skills_chips.dart';
 import 'widgets/portfolio_carousel.dart';
-import 'widgets/profile_header.dart';
 import 'widgets/section_title.dart';
 
 /// "Home" tab content: CV summary inspired by the Figma "CV design for
@@ -45,24 +44,12 @@ class HomePageContent extends StatelessWidget {
           }
 
           final profile = state.profile!;
+          final topPadding = MediaQuery.of(context).padding.top;
           return CustomScrollView(
             slivers: [
-              SliverAppBar(
+              SliverPersistentHeader(
                 pinned: true,
-                backgroundColor: white,
-                foregroundColor: black,
-                elevation: 0,
-                toolbarHeight: collapsedHeaderHeight,
-                expandedHeight: expandedHeaderHeight,
-                flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: false,
-                  titlePadding: const EdgeInsetsDirectional.only(
-                    start: paddingLG,
-                    bottom: paddingMD,
-                  ),
-                  title: CompactProfileHeader(profile: profile),
-                  background: ProfileHeader(profile: profile),
-                ),
+                delegate: HomeHeaderDelegate(profile: profile, topPadding: topPadding),
               ),
               SliverToBoxAdapter(
                 child: Padding(

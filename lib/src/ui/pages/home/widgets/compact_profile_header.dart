@@ -6,8 +6,8 @@ import '../../../../domain/models/profile_model.dart';
 import '../../../../presentation/widgets/text/generic_label.dart';
 
 /// Compact header shown once the user scrolls Home: a smaller avatar on
-/// the left, name and title on the right. Fades in as [ProfileHeader]
-/// (the expanded state) scrolls away, via [FlexibleSpaceBar].
+/// the left, name and title on the right. Cross-fades in as [ProfileHeader]
+/// (the expanded state) fades out, driven by [HomeHeaderDelegate].
 class CompactProfileHeader extends StatelessWidget {
   const CompactProfileHeader({Key? key, required this.profile}) : super(key: key);
 
