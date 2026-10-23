@@ -32,7 +32,7 @@ void main() {
     avatarAsset: 'assets/images/profile.jpg',
   );
   const portfolio = [
-    PortfolioItemModel(title: 'N1CO App', iconKey: 'account_balance_wallet_outlined'),
+    PortfolioItemModel(title: 'N1CO App', iconKey: 'account_balance_wallet_outlined', url: 'https://example.com'),
   ];
 
   Widget buildTestWidget(HomeUiState state) {

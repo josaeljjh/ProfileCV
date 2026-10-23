@@ -13,7 +13,7 @@ void main() {
   late GetPortfolioUseCase useCase;
 
   const portfolio = [
-    PortfolioItemModel(title: 'App', iconKey: 'account_balance_wallet_outlined'),
+    PortfolioItemModel(title: 'App', iconKey: 'account_balance_wallet_outlined', url: 'https://example.com'),
   ];
 
   setUp(() {

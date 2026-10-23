@@ -22,6 +22,12 @@ IconData portfolioIconFor(String key) {
       return Icons.restaurant_outlined;
     case 'fastfood_outlined':
       return Icons.fastfood_outlined;
+    case 'business_outlined':
+      return Icons.business_outlined;
+    case 'directions_car_outlined':
+      return Icons.directions_car_outlined;
+    case 'shopping_bag_outlined':
+      return Icons.shopping_bag_outlined;
     default:
       return Icons.apps_outlined;
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization/localization.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../config/resources/app_colors.dart';
 import '../../../config/resources/sizes.dart';
@@ -18,6 +19,13 @@ import 'widgets/portfolio_grid_item.dart';
 /// horizontal strip since this is the "see everything" screen.
 class PortfolioPageContent extends StatelessWidget {
   const PortfolioPageContent({Key? key}) : super(key: key);
+
+  static Future<void> _open(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +55,10 @@ class PortfolioPageContent extends StatelessWidget {
               childAspectRatio: 1,
             ),
             itemCount: state.portfolio.length,
-            itemBuilder: (context, index) => PortfolioGridItem(item: state.portfolio[index]),
+            itemBuilder: (context, index) {
+              final item = state.portfolio[index];
+              return PortfolioGridItem(item: item, onTap: () => _open(item.url));
+            },
           );
         },
       ),

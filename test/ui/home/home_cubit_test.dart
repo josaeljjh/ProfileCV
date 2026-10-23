@@ -39,7 +39,7 @@ void main() {
     avatarAsset: 'assets/images/profile.jpg',
   );
   const portfolio = [
-    PortfolioItemModel(title: 'App', iconKey: 'account_balance_wallet_outlined'),
+    PortfolioItemModel(title: 'App', iconKey: 'account_balance_wallet_outlined', url: 'https://example.com'),
   ];
   const homeSkills = ['Flutter', 'Kotlin'];
   const experience = [

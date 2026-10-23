@@ -53,39 +53,63 @@ class CvRepositoryImpl implements CvRepository {
   @override
   Future<DataState<List<PortfolioItemModel>>> getPortfolio() async {
     try {
-      // Brand/app names — proper nouns, no translation needed.
+      // Brand/app names — proper nouns, no translation needed. URLs are
+      // the apps' real Play Store listings.
       const portfolio = [
         PortfolioItemModel(
           title: 'N1CO App',
           iconKey: 'account_balance_wallet_outlined',
-        ),
-        PortfolioItemModel(
-          title: 'N1CO Business',
-          iconKey: 'storefront_outlined',
+          url: 'https://play.google.com/store/apps/details?id=com.n1co.pay.app',
         ),
         PortfolioItemModel(
           title: 'Hugo App',
           iconKey: 'delivery_dining_outlined',
-        ),
-        PortfolioItemModel(
-          title: 'Scotiabank App',
-          iconKey: 'account_balance_outlined',
-        ),
-        PortfolioItemModel(
-          title: 'Pagalo App',
-          iconKey: 'payments_outlined',
-        ),
-        PortfolioItemModel(
-          title: 'AFP Confia',
-          iconKey: 'savings_outlined',
+          url: 'https://play.google.com/store/apps/details?id=com.hugoapp.client&hl=es',
         ),
         PortfolioItemModel(
           title: 'Yummy App',
           iconKey: 'restaurant_outlined',
+          url: 'https://play.google.com/store/apps/details?id=com.yummy.customer&hl=es&gl=US',
+        ),
+        PortfolioItemModel(
+          title: 'Laca Laca App',
+          iconKey: 'storefront_outlined',
+          url: 'https://play.google.com/store/apps/details?id=com.mobilesv.lacalaca&hl=es-419',
         ),
         PortfolioItemModel(
           title: 'Gourmet Express',
           iconKey: 'fastfood_outlined',
+          url: 'https://play.google.com/store/apps/details?id=mobilesv.gourmetexpress&hl=es',
+        ),
+        PortfolioItemModel(
+          title: 'CCSB App',
+          iconKey: 'business_outlined',
+          url: 'https://play.google.com/store/apps/details?id=com.mobilesv.ccsb&hl=es',
+        ),
+        PortfolioItemModel(
+          title: 'Excel Automotriz',
+          iconKey: 'directions_car_outlined',
+          url: 'https://play.google.com/store/apps/details?id=com.excelautomotriz.excelOnline',
+        ),
+        PortfolioItemModel(
+          title: 'Pagalo App',
+          iconKey: 'payments_outlined',
+          url: 'https://play.google.com/store/apps/details?id=com.mobilesv.pagalo&hl=es',
+        ),
+        PortfolioItemModel(
+          title: 'AFP Crecer',
+          iconKey: 'savings_outlined',
+          url: 'https://play.google.com/store/search?q=afp%20crecer&c=apps&hl=es',
+        ),
+        PortfolioItemModel(
+          title: 'Samix App',
+          iconKey: 'shopping_bag_outlined',
+          url: 'https://play.google.com/store/apps/details?id=com.mobilesv.samix&hl=es',
+        ),
+        PortfolioItemModel(
+          title: 'Banco Hipotecario',
+          iconKey: 'account_balance_outlined',
+          url: 'https://play.google.com/store/apps/details?id=com.bancohipotecario.android&hl=es-419',
         ),
       ];
       return const DataSuccess(portfolio);

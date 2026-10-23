@@ -15,7 +15,7 @@ void main() {
   late PortfolioCubit cubit;
 
   const portfolio = [
-    PortfolioItemModel(title: 'N1CO App', iconKey: 'account_balance_wallet_outlined'),
+    PortfolioItemModel(title: 'N1CO App', iconKey: 'account_balance_wallet_outlined', url: 'https://example.com'),
   ];
 
   setUp(() {
