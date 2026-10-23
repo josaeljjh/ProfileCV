@@ -90,12 +90,34 @@ class _AppState extends State<App> {
         fontFamily: gothamFontFamily,
         brightness: Brightness.light,
         scaffoldBackgroundColor: white,
+        // Material 3's default color scheme (no seed given) tints
+        // "white" surfaces - AppBar, Card, NavigationBar - with its
+        // default purple surfaceTint, which reads as a pinkish white.
+        // This app uses its own flat color tokens (colors.dart), not a
+        // Material color scheme, so the tint is switched off and every
+        // surface pinned to the real white/niagara tokens.
+        colorScheme: ColorScheme.fromSeed(seedColor: niagara, brightness: Brightness.light)
+            .copyWith(surface: white, surfaceTint: Colors.transparent),
+        appBarTheme: const AppBarTheme(backgroundColor: white, surfaceTintColor: Colors.transparent),
+        cardTheme: const CardThemeData(color: white, surfaceTintColor: Colors.transparent),
+        navigationBarTheme: const NavigationBarThemeData(
+          backgroundColor: white,
+          surfaceTintColor: Colors.transparent,
+        ),
       ),
       darkTheme: ThemeData(
         useMaterial3: true,
         fontFamily: gothamFontFamily,
         brightness: Brightness.dark,
         scaffoldBackgroundColor: carbon800,
+        colorScheme: ColorScheme.fromSeed(seedColor: niagara, brightness: Brightness.dark)
+            .copyWith(surface: carbon800, surfaceTint: Colors.transparent),
+        appBarTheme: const AppBarTheme(backgroundColor: carbon800, surfaceTintColor: Colors.transparent),
+        cardTheme: const CardThemeData(color: carbon700, surfaceTintColor: Colors.transparent),
+        navigationBarTheme: const NavigationBarThemeData(
+          backgroundColor: carbon800,
+          surfaceTintColor: Colors.transparent,
+        ),
       ),
       themeMode: ThemeMode.system,
     );
