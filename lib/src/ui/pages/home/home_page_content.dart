@@ -61,7 +61,7 @@ class HomePageContent extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: paddingXXL),
                         child: GenericLabel(
                           label: profile.objective,
-                          lines: null,
+                          lines: 4,
                           softWrap: true,
                           textAlign: TextAlign.center,
                           style: const TextStyle(fontSize: fontSize13, color: gray400),
