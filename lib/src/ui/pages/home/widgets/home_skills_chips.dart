@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../config/resources/app_colors.dart';
 import '../../../../config/resources/sizes.dart';
+import '../../../../presentation/widgets/skills/skill_icon.dart';
 import '../../../../presentation/widgets/text/generic_label.dart';
 
 /// Quick skills preview chips shown on Home (the full, categorized list
@@ -27,9 +28,16 @@ class HomeSkillsChips extends StatelessWidget {
                     borderRadius: BorderRadius.circular(borderRadiusLG),
                     border: Border.all(color: colors.divider),
                   ),
-                  child: GenericLabel(
-                    label: skill,
-                    style: TextStyle(fontSize: fontSize14, color: colors.textPrimary),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(skillIconFor(skill), size: iconSizeSM, color: colors.textSecondary),
+                      const SizedBox(width: paddingSM - 2),
+                      GenericLabel(
+                        label: skill,
+                        style: TextStyle(fontSize: fontSize14, color: colors.textPrimary),
+                      ),
+                    ],
                   ),
                 ))
             .toList(),
