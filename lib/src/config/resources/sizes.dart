@@ -46,5 +46,5 @@ const double avatarRadiusSM = 20;
 const double avatarRadiusLG = 60;
 const double collapsedHeaderHeight = 56;
 const double expandedHeaderHeight = 340;
-const double portfolioCardSize = 120;
-const double portfolioCarouselHeight = 160;
+const double portfolioCardSize = 100;
+const double portfolioCarouselHeight = 140;
