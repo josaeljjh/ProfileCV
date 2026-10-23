@@ -82,7 +82,10 @@ void main() {
       await tester.pumpWidget(buildTestWidget(loadedState));
       await tester.pump(const Duration(milliseconds: 100));
 
-      expect(find.text(profile.name), findsOneWidget);
+      // Name/title render twice: once in the expanded ProfileHeader, once
+      // in the compact CompactProfileHeader (FlexibleSpaceBar keeps both
+      // in the tree and cross-fades them based on scroll offset).
+      expect(find.text(profile.name), findsNWidgets(2));
       expect(find.text('Portfolio'), findsOneWidget);
       expect(find.text('Skills'), findsOneWidget);
       expect(find.text('Experiencia'), findsOneWidget);

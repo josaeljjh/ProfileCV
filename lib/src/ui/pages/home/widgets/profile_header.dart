@@ -5,7 +5,10 @@ import '../../../../config/resources/sizes.dart';
 import '../../../../domain/models/profile_model.dart';
 import '../../../../presentation/widgets/text/generic_label.dart';
 
-/// Avatar, name, title, location and objective paragraph at the top of Home.
+/// Avatar, name, title and location shown in the Home header's expanded
+/// (scrolled-to-top) state. The objective paragraph lives in the
+/// scrollable body instead, since it's open-ended text that wouldn't fit
+/// safely inside the collapsing header's fixed height.
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({Key? key, required this.profile}) : super(key: key);
 
@@ -45,14 +48,6 @@ class ProfileHeader extends StatelessWidget {
               softWrap: true,
               textAlign: TextAlign.center,
               style: const TextStyle(fontSize: fontSize15, color: slateGray),
-            ),
-            const SizedBox(height: paddingLG),
-            GenericLabel(
-              label: profile.objective,
-              lines: null,
-              softWrap: true,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: fontSize13, color: gray400),
             ),
           ],
         ),

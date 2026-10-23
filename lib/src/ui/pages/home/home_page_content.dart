@@ -13,6 +13,7 @@ import '../portfolio/portfolio_page.dart';
 import '../skills/skills_page.dart';
 import 'cubit/home_cubit.dart';
 import 'cubit/home_ui_state.dart';
+import 'widgets/compact_profile_header.dart';
 import 'widgets/experience_timeline.dart';
 import 'widgets/home_skills_chips.dart';
 import 'widgets/portfolio_carousel.dart';
@@ -20,9 +21,10 @@ import 'widgets/profile_header.dart';
 import 'widgets/section_title.dart';
 
 /// "Home" tab content: CV summary inspired by the Figma "CV design for
-/// mobile" layout - profile header, portfolio carousel, skills chips and
-/// experience list. Driven by [HomeCubit] / [HomeUiState]; purely
-/// composition, the actual sections live under widgets/.
+/// mobile" layout - a collapsing header (big profile view that shrinks
+/// into a compact avatar+name+title bar on scroll), portfolio carousel,
+/// skills chips and experience list. Driven by [HomeCubit] / [HomeUiState];
+/// purely composition, the actual sections live under widgets/.
 class HomePageContent extends StatelessWidget {
   const HomePageContent({Key? key}) : super(key: key);
 
@@ -30,15 +32,6 @@ class HomePageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
-      appBar: AppBar(
-        backgroundColor: white,
-        elevation: 0,
-        centerTitle: true,
-        title: GenericLabel(
-          label: CV_TITLE.i18n(),
-          style: const TextStyle(color: black, fontWeight: FontWeight.bold),
-        ),
-      ),
       body: BlocBuilder<HomeCubit, HomeUiState>(
         builder: (context, state) {
           if (state.isLoading) {
@@ -51,36 +44,69 @@ class HomePageContent extends StatelessWidget {
             );
           }
 
-          return SingleChildScrollView(
-            padding: const EdgeInsets.only(bottom: paddingXXL),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ProfileHeader(profile: state.profile!),
-                const SizedBox(height: paddingXXXL),
-                SectionTitle(
-                  text: SECTION_PORTFOLIO.i18n(),
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => const PortfolioPage()),
+          final profile = state.profile!;
+          return CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                pinned: true,
+                backgroundColor: white,
+                foregroundColor: black,
+                elevation: 0,
+                toolbarHeight: collapsedHeaderHeight,
+                expandedHeight: expandedHeaderHeight,
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: false,
+                  titlePadding: const EdgeInsetsDirectional.only(
+                    start: paddingLG,
+                    bottom: paddingMD,
+                  ),
+                  title: CompactProfileHeader(profile: profile),
+                  background: ProfileHeader(profile: profile),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: paddingXXL),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: paddingXXL),
+                        child: GenericLabel(
+                          label: profile.objective,
+                          lines: null,
+                          softWrap: true,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: fontSize13, color: gray400),
+                        ),
+                      ),
+                      const SizedBox(height: paddingXXXL),
+                      SectionTitle(
+                        text: SECTION_PORTFOLIO.i18n(),
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(builder: (_) => const PortfolioPage()),
+                        ),
+                      ),
+                      const SizedBox(height: paddingMD),
+                      PortfolioCarousel(portfolio: state.portfolio),
+                      const SizedBox(height: paddingXXXL),
+                      SectionTitle(
+                        text: SECTION_SKILLS.i18n(),
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(builder: (_) => const SkillsPage()),
+                        ),
+                      ),
+                      const SizedBox(height: paddingMD),
+                      HomeSkillsChips(skills: state.homeSkills),
+                      const SizedBox(height: paddingXXXL),
+                      SectionTitle(text: SECTION_EXPERIENCE.i18n()),
+                      const SizedBox(height: paddingSM),
+                      ExperienceTimeline(experience: state.experience),
+                    ],
                   ),
                 ),
-                const SizedBox(height: paddingMD),
-                PortfolioCarousel(portfolio: state.portfolio),
-                const SizedBox(height: paddingXXXL),
-                SectionTitle(
-                  text: SECTION_SKILLS.i18n(),
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => const SkillsPage()),
-                  ),
-                ),
-                const SizedBox(height: paddingMD),
-                HomeSkillsChips(skills: state.homeSkills),
-                const SizedBox(height: paddingXXXL),
-                SectionTitle(text: SECTION_EXPERIENCE.i18n()),
-                const SizedBox(height: paddingSM),
-                ExperienceTimeline(experience: state.experience),
-              ],
-            ),
+              ),
+            ],
           );
         },
       ),

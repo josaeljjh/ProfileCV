@@ -1,6 +1,5 @@
 // ignore_for_file: constant_identifier_names
 
-const CV_TITLE = 'cv_title';
 const SKILLS_TITLE = 'skills_title';
 const PROJECTS_TITLE = 'projects_title';
 const CONTACT_TITLE = 'contact_title';
