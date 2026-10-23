@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../config/resources/colors.dart';
+import '../../../../config/resources/app_colors.dart';
 import '../../../../config/resources/sizes.dart';
 import '../../../../domain/models/profile_model.dart';
 import 'compact_profile_header.dart';
@@ -15,10 +15,11 @@ import 'profile_header.dart';
 /// widget (like CompactProfileHeader's Row) at full expansion - it showed
 /// both headers at once instead of starting on just the big one.
 class HomeHeaderDelegate extends SliverPersistentHeaderDelegate {
-  HomeHeaderDelegate({required this.profile, required this.topPadding});
+  HomeHeaderDelegate({required this.profile, required this.topPadding, required this.isDark});
 
   final ProfileModel profile;
   final double topPadding;
+  final bool isDark;
 
   @override
   double get minExtent => collapsedHeaderHeight + topPadding;
@@ -32,7 +33,7 @@ class HomeHeaderDelegate extends SliverPersistentHeaderDelegate {
     final fraction = range > 0 ? (shrinkOffset / range).clamp(0.0, 1.0) : 1.0;
 
     return Container(
-      color: white,
+      color: AppColors.of(context).background,
       padding: EdgeInsets.only(top: topPadding),
       child: Stack(
         fit: StackFit.expand,
@@ -74,6 +75,8 @@ class HomeHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(covariant HomeHeaderDelegate oldDelegate) {
-    return oldDelegate.profile != profile || oldDelegate.topPadding != topPadding;
+    return oldDelegate.profile != profile ||
+        oldDelegate.topPadding != topPadding ||
+        oldDelegate.isDark != isDark;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../config/resources/app_colors.dart';
 import '../../../../config/resources/colors.dart';
 import '../../../../config/resources/sizes.dart';
 import '../../../../domain/models/profile_model.dart';
@@ -15,6 +16,7 @@ class CompactProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.of(context);
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -31,11 +33,11 @@ class CompactProfileHeader extends StatelessWidget {
             children: [
               GenericLabel(
                 label: profile.name,
-                style: const TextStyle(fontSize: fontSize16, fontWeight: FontWeight.bold, color: black),
+                style: TextStyle(fontSize: fontSize16, fontWeight: FontWeight.bold, color: colors.textPrimary),
               ),
               GenericLabel(
                 label: profile.title,
-                style: const TextStyle(fontSize: fontSize12, color: slateGray),
+                style: TextStyle(fontSize: fontSize12, color: colors.textSecondary),
               ),
             ],
           ),

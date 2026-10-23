@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization/localization.dart';
 
-import '../../../config/resources/colors.dart';
+import '../../../config/resources/app_colors.dart';
 import '../../../config/resources/sizes.dart';
 import '../../../config/tools/locale_resolver.dart';
 import '../../../core/resources/translations_constant.dart';
@@ -29,7 +29,7 @@ class HomePageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: AppColors.of(context).background,
       body: BlocBuilder<HomeCubit, HomeUiState>(
         builder: (context, state) {
           if (state.isLoading) {
@@ -48,7 +48,11 @@ class HomePageContent extends StatelessWidget {
             slivers: [
               SliverPersistentHeader(
                 pinned: true,
-                delegate: HomeHeaderDelegate(profile: profile, topPadding: topPadding),
+                delegate: HomeHeaderDelegate(
+                  profile: profile,
+                  topPadding: topPadding,
+                  isDark: Theme.of(context).brightness == Brightness.dark,
+                ),
               ),
               SliverToBoxAdapter(
                 child: Padding(

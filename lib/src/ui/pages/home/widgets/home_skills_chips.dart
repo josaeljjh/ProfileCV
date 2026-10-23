@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../config/resources/colors.dart';
+import '../../../../config/resources/app_colors.dart';
 import '../../../../config/resources/sizes.dart';
 import '../../../../presentation/widgets/text/generic_label.dart';
 
@@ -13,6 +13,7 @@ class HomeSkillsChips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: paddingXL),
       child: Wrap(
@@ -22,12 +23,13 @@ class HomeSkillsChips extends StatelessWidget {
             .map((skill) => Container(
                   padding: const EdgeInsets.symmetric(horizontal: paddingLG, vertical: paddingMD),
                   decoration: BoxDecoration(
-                    color: athensGray,
+                    color: colors.cardSurface,
                     borderRadius: BorderRadius.circular(borderRadiusLG),
+                    border: Border.all(color: colors.divider),
                   ),
                   child: GenericLabel(
                     label: skill,
-                    style: const TextStyle(fontSize: fontSize14, color: black),
+                    style: TextStyle(fontSize: fontSize14, color: colors.textPrimary),
                   ),
                 ))
             .toList(),

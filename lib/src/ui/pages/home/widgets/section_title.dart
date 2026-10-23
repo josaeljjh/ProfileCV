@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../config/resources/colors.dart';
+import '../../../../config/resources/app_colors.dart';
 import '../../../../config/resources/sizes.dart';
 import '../../../../presentation/widgets/text/generic_label.dart';
 
@@ -16,16 +16,17 @@ class SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.of(context);
     final title = Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         GenericLabel(
           label: text,
-          style: const TextStyle(fontSize: fontSize20, fontWeight: FontWeight.bold, color: black),
+          style: TextStyle(fontSize: fontSize20, fontWeight: FontWeight.bold, color: colors.textPrimary),
         ),
         if (onTap != null) ...[
           const SizedBox(width: paddingXS),
-          const Icon(Icons.chevron_right, color: slateGray),
+          Icon(Icons.chevron_right, color: colors.textSecondary),
         ],
       ],
     );

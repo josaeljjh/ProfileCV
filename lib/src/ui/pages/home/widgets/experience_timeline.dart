@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../config/resources/app_colors.dart';
 import '../../../../config/resources/colors.dart';
 import '../../../../config/resources/sizes.dart';
 import '../../../../domain/models/experience_model.dart';
@@ -32,11 +33,12 @@ class ExperienceTimeline extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.of(context);
     return Column(
       children: [
         for (int i = 0; i < experience.length; i++) ...[
           _CompanyBlock(company: experience[i]),
-          if (i != experience.length - 1) const Divider(height: paddingXXXL, color: athensGray),
+          if (i != experience.length - 1) Divider(height: paddingXXXL, color: colors.divider),
         ],
       ],
     );
@@ -81,6 +83,7 @@ class _RoleDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -88,41 +91,41 @@ class _RoleDetails extends StatelessWidget {
           label: role.title,
           lines: null,
           softWrap: true,
-          style: const TextStyle(fontSize: fontSize15, fontWeight: FontWeight.bold, color: black),
+          style: TextStyle(fontSize: fontSize15, fontWeight: FontWeight.bold, color: colors.textPrimary),
         ),
         if (companyName != null)
           GenericLabel(
             label: companyName!,
             lines: null,
             softWrap: true,
-            style: const TextStyle(fontSize: fontSize13, color: slateGray),
+            style: TextStyle(fontSize: fontSize13, color: colors.textSecondary),
           ),
         if (role.employmentType != null)
           GenericLabel(
             label: role.employmentType!,
             lines: null,
             softWrap: true,
-            style: const TextStyle(fontSize: fontSize12, color: slateGray),
+            style: TextStyle(fontSize: fontSize12, color: colors.textSecondary),
           ),
         GenericLabel(
           label: '${role.period} · ${role.duration}',
           lines: null,
           softWrap: true,
-          style: const TextStyle(fontSize: fontSize12, color: gray400),
+          style: TextStyle(fontSize: fontSize12, color: colors.textTertiary),
         ),
         if (role.skills.isNotEmpty) ...[
           const SizedBox(height: paddingXS),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(Icons.local_offer_outlined, size: iconSizeXS, color: slateGray),
+              Icon(Icons.local_offer_outlined, size: iconSizeXS, color: colors.textSecondary),
               const SizedBox(width: paddingXS),
               Expanded(
                 child: GenericLabel(
                   label: role.skills,
                   lines: null,
                   softWrap: true,
-                  style: const TextStyle(fontSize: fontSize12, color: slateGray),
+                  style: TextStyle(fontSize: fontSize12, color: colors.textSecondary),
                 ),
               ),
             ],
@@ -140,6 +143,7 @@ class _CompanyBlock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.of(context);
     // A single-role company collapses into one flat entry (logo + role +
     // company + dates), matching how LinkedIn displays it.
     if (company.roles.length == 1) {
@@ -177,14 +181,14 @@ class _CompanyBlock extends StatelessWidget {
                       label: company.company,
                       lines: null,
                       softWrap: true,
-                      style: const TextStyle(fontSize: fontSize16, fontWeight: FontWeight.bold, color: black),
+                      style: TextStyle(fontSize: fontSize16, fontWeight: FontWeight.bold, color: colors.textPrimary),
                     ),
                     if (company.totalDuration != null)
                       GenericLabel(
                         label: company.totalDuration!,
                         lines: null,
                         softWrap: true,
-                        style: const TextStyle(fontSize: fontSize13, color: slateGray),
+                        style: TextStyle(fontSize: fontSize13, color: colors.textSecondary),
                       ),
                   ],
                 ),
@@ -208,7 +212,7 @@ class _CompanyBlock extends StatelessWidget {
                           decoration: const BoxDecoration(color: gray200, shape: BoxShape.circle),
                         ),
                         if (i != company.roles.length - 1)
-                          const Expanded(child: VerticalDivider(width: 1, thickness: 1, color: athensGray)),
+                          Expanded(child: VerticalDivider(width: 1, thickness: 1, color: colors.divider)),
                       ],
                     ),
                   ),

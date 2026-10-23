@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../config/resources/app_colors.dart';
 import '../../../../config/resources/colors.dart';
 import '../../../../config/resources/sizes.dart';
 import '../../../../domain/models/profile_model.dart';
@@ -17,6 +18,7 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = AppColors.of(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: paddingXXL),
@@ -33,7 +35,7 @@ class ProfileHeader extends StatelessWidget {
               lines: null,
               softWrap: true,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: fontSize22, fontWeight: FontWeight.bold, color: black),
+              style: TextStyle(fontSize: fontSize22, fontWeight: FontWeight.bold, color: colors.textPrimary),
             ),
             const SizedBox(height: paddingXS),
             GenericLabel(
@@ -41,14 +43,14 @@ class ProfileHeader extends StatelessWidget {
               lines: null,
               softWrap: true,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: fontSize15, color: slateGray),
+              style: TextStyle(fontSize: fontSize15, color: colors.textSecondary),
             ),
             GenericLabel(
               label: profile.location,
               lines: null,
               softWrap: true,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: fontSize15, color: slateGray),
+              style: TextStyle(fontSize: fontSize15, color: colors.textSecondary),
             ),
             const SizedBox(height: paddingLG),
             GenericLabel(
@@ -56,7 +58,7 @@ class ProfileHeader extends StatelessWidget {
               lines: 5,
               softWrap: true,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: fontSize13, color: gray400),
+              style: TextStyle(fontSize: fontSize13, color: colors.textTertiary),
             ),
           ],
         ),
