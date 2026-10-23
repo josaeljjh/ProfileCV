@@ -67,6 +67,8 @@ void main() {
           phone: '+1 234',
           linkedinDisplay: 'linkedin.com/in/test',
           linkedinUrl: 'https://linkedin.com/in/test',
+          githubUrl: 'https://github.com/test',
+          cvDownloadUrl: 'https://example.com/cv.pdf',
         ),
       );
       await tester.pumpWidget(buildTestWidget(loadedState));

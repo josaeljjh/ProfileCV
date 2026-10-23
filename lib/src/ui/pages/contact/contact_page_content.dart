@@ -64,6 +64,20 @@ class ContactPageContent extends StatelessWidget {
                 subtitle: contact.linkedinDisplay,
                 onTap: () => _open(Uri.parse(contact.linkedinUrl)),
               ),
+              const SizedBox(height: paddingSM),
+              ContactTile(
+                icon: Icons.code,
+                title: CONTACT_GITHUB_LABEL.i18n(),
+                subtitle: contact.githubUrl.replaceFirst('https://', ''),
+                onTap: () => _open(Uri.parse(contact.githubUrl)),
+              ),
+              const SizedBox(height: paddingSM),
+              ContactTile(
+                icon: Icons.picture_as_pdf_outlined,
+                title: CONTACT_DOWNLOAD_CV_LABEL.i18n(),
+                subtitle: CONTACT_DOWNLOAD_CV_SUBTITLE.i18n(),
+                onTap: () => _open(Uri.parse(contact.cvDownloadUrl)),
+              ),
             ],
           );
         },
