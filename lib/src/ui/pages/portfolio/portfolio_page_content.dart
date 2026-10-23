@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:localization/localization.dart';
 
-import '../../../config/resources/colors.dart';
+import '../../../config/resources/app_colors.dart';
 import '../../../config/resources/sizes.dart';
 import '../../../core/resources/translations_constant.dart';
 import '../../../presentation/widgets/feedback/error_view.dart';
@@ -22,7 +22,7 @@ class PortfolioPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: AppColors.of(context).background,
       // An explicit empty TextStyle forces GenericLabel to inherit the
       // ambient AppBar title style instead of its own (unsuitable) default.
       appBar: AppBar(title: GenericLabel(label: PORTFOLIO_TITLE.i18n(), style: const TextStyle())),

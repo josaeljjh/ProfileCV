@@ -6,21 +6,22 @@ import '../../../config/di/service_locator.dart';
 import '../../../core/resources/translations_constant.dart';
 import '../contact/contact_page.dart';
 import '../home/home_page.dart';
+import '../portfolio/portfolio_page.dart';
 import '../projects/projects_page.dart';
 import '../skills/skills_page.dart';
 import 'cubit/bottom_nav_cubit.dart';
 
-/// Hosts the bottom navigation for the CV: Home, Skills, Proyectos and
-/// Contacto. Mirrors PokeAppFlutter's DashBoardScreen pattern: a
-/// BottomNavCubit drives the selected tab and a Material 3 NavigationBar
-/// replaces the old BottomNavigationBar/setState approach.
+/// Hosts the bottom navigation for the CV: Home, Portfolio, Skills,
+/// Proyectos and Contacto. Mirrors PokeAppFlutter's DashBoardScreen
+/// pattern: a BottomNavCubit drives the selected tab and a Material 3
+/// NavigationBar replaces the old BottomNavigationBar/setState approach.
 ///
 /// Unlike PokeAppFlutter's dashboard, each tab here keeps its own
-/// BlocProvider (via HomePage/SkillsPage/ProjectsPage/ContactPage)
-/// instead of having DashBoardScreen eagerly provide every tab's cubit
-/// through a single MultiBlocProvider: Skills and Projects are also
-/// reachable as standalone pushed screens (from Home's tappable section
-/// titles), outside this widget's subtree, so they need to stay
+/// BlocProvider (via HomePage/PortfolioPage/SkillsPage/ProjectsPage/
+/// ContactPage) instead of having DashBoardScreen eagerly provide every
+/// tab's cubit through a single MultiBlocProvider: Portfolio and Skills
+/// are also reachable as standalone pushed screens (from Home's tappable
+/// section titles), outside this widget's subtree, so they need to stay
 /// self-contained.
 class DashBoardScreen extends StatelessWidget {
   const DashBoardScreen({Key? key}) : super(key: key);
@@ -34,6 +35,7 @@ class DashBoardScreen extends StatelessWidget {
 
   static const _pages = [
     HomePage(),
+    PortfolioPage(),
     SkillsPage(),
     ProjectsPage(),
     ContactPage(),
@@ -56,6 +58,11 @@ class DashBoardScreen extends StatelessWidget {
             icon: const Icon(Icons.home_outlined),
             selectedIcon: const Icon(Icons.home),
             label: NAV_HOME.i18n(),
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.apps_outlined),
+            selectedIcon: const Icon(Icons.apps),
+            label: NAV_PORTFOLIO.i18n(),
           ),
           NavigationDestination(
             icon: const Icon(Icons.star_outline),

@@ -8,6 +8,7 @@ const SECTION_PORTFOLIO = 'section_portfolio';
 const SECTION_SKILLS = 'section_skills';
 const SECTION_EXPERIENCE = 'section_experience';
 const NAV_HOME = 'nav_home';
+const NAV_PORTFOLIO = 'nav_portfolio';
 const NAV_SKILLS = 'nav_skills';
 const NAV_PROJECTS = 'nav_projects';
 const NAV_CONTACT = 'nav_contact';
