@@ -17,9 +17,16 @@ class ContactPageContent extends StatelessWidget {
   const ContactPageContent({Key? key}) : super(key: key);
 
   static Future<void> _open(Uri uri) async {
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri);
-    }
+    if (!await canLaunchUrl(uri)) return;
+    // https links (LinkedIn, GitHub, the CV viewer) default to opening
+    // whatever native app is registered for that domain if one's
+    // installed (LinkedIn's app, for one) - which then asks the visitor
+    // to log in instead of just showing the public page. Force the
+    // in-app browser view for those so it's always the public web page,
+    // same as tapping the link from a desktop browser. mailto:/tel: stay
+    // on the platform default so they open the mail/phone app as usual.
+    final mode = uri.scheme == 'https' ? LaunchMode.inAppBrowserView : LaunchMode.platformDefault;
+    await launchUrl(uri, mode: mode);
   }
 
   @override
