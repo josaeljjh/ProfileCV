@@ -41,7 +41,18 @@ class HomeHeaderDelegate extends SliverPersistentHeaderDelegate {
             opacity: 1 - fraction,
             child: IgnorePointer(
               ignoring: fraction > 0.5,
-              child: ProfileHeader(profile: profile),
+              // ProfileHeader needs its full natural height (~maxExtent)
+              // to lay out without overflowing, even once the header has
+              // shrunk past that. OverflowBox lets it claim that height
+              // regardless of the current (smaller) constraints; Stack's
+              // default clip behavior trims anything outside the visible
+              // area, which is fine since this is already fading to 0.
+              child: OverflowBox(
+                alignment: Alignment.topCenter,
+                minHeight: 0,
+                maxHeight: expandedHeaderHeight,
+                child: ProfileHeader(profile: profile),
+              ),
             ),
           ),
           Positioned(
