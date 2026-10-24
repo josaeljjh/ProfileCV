@@ -29,8 +29,6 @@ dependencies:
   get_it: ^7.6.4
   #dateFormat
   intl: ^0.20.2
-  #make request to api
-  retrofit: ^4.0.3
   #Hooks
   flutter_hooks: ^0.20.3
   #chached image
@@ -49,18 +47,12 @@ dependencies:
   shimmer: ^3.0.0
   #flutter_animate
   flutter_animate: ^4.2.0+1
-  #Database
-  floor: any
-
-
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   change_app_package_name: ^1.1.0
   flutter_lints: ^3.0.1
-  retrofit_generator: ^8.0.4
-  floor_generator: ^1.4.2
   build_runner: ^2.4.6
   bloc_test: ^9.1.5
   mocktail: ^1.0.3
