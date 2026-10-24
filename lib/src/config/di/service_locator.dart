@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
@@ -25,9 +24,6 @@ final GetIt sl = GetIt.instance;
 Future<void> init() async {
   //navigation service
   sl.registerLazySingleton(() => NavigationService());
-
-  // Dio
-  sl.registerLazySingleton<Dio>(() => getDio());
 
   // ConnectionInfo
   sl.registerLazySingleton<ConnectionInfo>(() => ConnectionInfoImpl(sl()));
@@ -59,18 +55,4 @@ Future<void> init() async {
   sl.registerFactory(() => PortfolioCubit(getPortfolioUseCase: sl()));
   sl.registerFactory(() => ProjectsCubit(getProjectsUseCase: sl()));
   sl.registerFactory(() => ContactCubit(getContactUseCase: sl()));
-}
-
-Dio getDio() {
-  final dio = Dio(
-    BaseOptions(
-      validateStatus: (status) {
-        return true;
-      },
-      followRedirects: false,
-      connectTimeout: const Duration(seconds: 30),
-      receiveTimeout: const Duration(seconds: 30),
-    ),
-  );
-  return dio;
 }

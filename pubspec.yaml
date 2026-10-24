@@ -57,6 +57,12 @@ dev_dependencies:
   bloc_test: ^9.1.5
   mocktail: ^1.0.3
 
+# win32 5.0.9 (pulled transitively by a *_windows plugin) references a
+# dart:typed_data API that newer Dart SDKs removed - fails to compile
+# even though pub considers 5.0.9 resolvable. Force a current version.
+dependency_overrides:
+  win32: ^6.4.0
+
 flutter:
   uses-material-design: true
 
