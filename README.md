@@ -3,6 +3,16 @@ Flutter Base to Clean architecture
 
 Clean Architecture - Flutter
 
+## Screenshots
+
+| Home | Experience | Portfolio |
+|---|---|---|
+| ![Home](docs/screenshots/home.webp) | ![Experience](docs/screenshots/experience.webp) | ![Portfolio](docs/screenshots/portfolio.webp) |
+
+| Skills | Contact |
+|---|---|
+| ![Skills](docs/screenshots/skills.webp) | ![Contact](docs/screenshots/contact.webp) |
+
 Welcome in this boilerplate was built based on the best architecture practices, in which the following were taken into account:
 
     Modularization by layers and features
